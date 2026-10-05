@@ -3,13 +3,43 @@
     "encomenda": {
       "type": "terra-encomenda",
       "blocks": {
-        "info_prazos": { "type": "info", "settings": { "titulo": "Prazos", "texto": "<p>X dias úteis a contar da chegada dos rolos ao lab.</p>" } },
-        "info_scans": { "type": "info", "settings": { "titulo": "Os teus scans", "texto": "<p>Recebes um email com uma galeria privada. Ficas com 3 dias para ver e descarregar.</p>" } },
-        "info_negativos": { "type": "info", "settings": { "titulo": "Negativos", "texto": "<p>Guardamos 3 meses sem custo. Junta vários e pede-os de uma vez.</p>" } }
+        "info_prazos": {
+          "type": "info",
+          "settings": {
+            "titulo": "Prazos",
+            "texto": "<p>X dias úteis a contar da chegada dos rolos ao lab.</p>"
+          }
+        },
+        "info_scans": {
+          "type": "info",
+          "settings": {
+            "titulo": "Os teus scans",
+            "texto": "<p>Recebes um email com uma galeria privada. Ficas com 3 dias para ver e descarregar.</p>"
+          }
+        },
+        "info_negativos": {
+          "type": "info",
+          "settings": {
+            "titulo": "Negativos",
+            "texto": "<p>Guardamos 3 meses sem custo. Junta vários e pede-os de uma vez.</p>"
+          }
+        }
       },
-      "block_order": ["info_prazos", "info_scans", "info_negativos"],
-      "settings": { "limiar": 3, "meses_arquivo": 3, "morada_balcao": "Rua Duque de Saldanha 345, Bonfim" }
+      "block_order": [
+        "info_prazos",
+        "info_scans",
+        "info_negativos"
+      ],
+      "settings": {
+        "limiar": 3,
+        "meses_arquivo": 3,
+        "morada_balcao": "Rua Duque de Saldanha 345, Bonfim",
+        "envio_produto": "envio-para-o-lab-dpd",
+        "devolucao_produto": "devolucao-negativos-dpd"
+      }
     }
   },
-  "order": ["encomenda"]
+  "order": [
+    "encomenda"
+  ]
 }
