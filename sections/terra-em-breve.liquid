@@ -1,11 +1,7 @@
 {%- comment -%}
   Terra · Página "em breve" (template password). Mostra-se a quem visita a loja enquanto está protegida por palavra-passe.
 {%- endcomment -%}
-{%- liquid
-  assign s = section.settings
-  assign total = s.fotogramas_total | default: 12
-  assign feitos = s.fotogramas_feitos | default: 7
--%}
+{%- assign s = section.settings -%}
 <div class="tb">
   <div class="tb__bar">
     <span>{{ s.antetitulo }}</span>
@@ -13,39 +9,16 @@
   </div>
 
   <main class="tb__main">
-    <img class="tb__logo" src="{{ 'terra-logo-castanho.png' | asset_url }}" alt="{{ shop.name | escape }}" width="1400" height="617">
-
+    {%- if s.logo != blank -%}
+      {{ s.logo | image_url: width: 1040 | image_tag: class: 'tb__logo', alt: shop.name }}
+    {%- else -%}
+      <img class="tb__logo" src="{{ 'terra-logo-filmlab.webp' | asset_url }}" alt="{{ shop.name | escape }}" width="2560" height="1129">
+    {%- endif -%}
     <h1 class="tb__titulo">{{ s.titulo }}</h1>
-    <div class="tb__texto">{{ s.texto }}</div>
-    {%- if s.texto_en != blank -%}<p class="tb__en" lang="en">{{ s.texto_en }}</p>{%- endif -%}
-
-    <figure class="tb__rolo" aria-label="{{ s.rolo_legenda | escape }}">
-      <div class="tb__tira" aria-hidden="true">
-        {%- for i in (1..total) -%}
-          <span class="tb__frame{% if i <= feitos %} is-feito{% endif %}"><em>{{ i | prepend: '0' | slice: -2, 2 }}</em></span>
-        {%- endfor -%}
-      </div>
-      <figcaption>{{ s.rolo_legenda }} · {{ feitos | prepend: '0' | slice: -2, 2 }}/{{ total | prepend: '0' | slice: -2, 2 }}</figcaption>
-    </figure>
-
-    <div class="tb__news">
-      <p class="tb__news-titulo">{{ s.news_titulo }}</p>
-      {%- form 'customer', id: 'terra-em-breve' -%}
-        <input type="hidden" name="contact[tags]" value="newsletter, em-breve">
-        {%- if form.posted_successfully? -%}
-          <p class="tb__ok">Obrigado! Avisamos-te assim que abrirmos.</p>
-        {%- else -%}
-          <label for="tb-email" class="t-visually-hidden">Email</label>
-          <input id="tb-email" type="email" name="contact[email]" required autocomplete="email" placeholder="o.teu@email.pt">
-          <button type="submit">Avisem-me</button>
-          {%- if form.errors -%}<p class="tb__erro">{{ form.errors | default_errors }}</p>{%- endif -%}
-        {%- endif -%}
-      {%- endform -%}
-    </div>
+    {%- if s.subtitulo != blank -%}<p class="tb__sub">{{ s.subtitulo }}</p>{%- endif -%}
   </main>
 
   <footer class="tb__footer">
-    <span>{{ s.morada }}</span>
     {%- if s.email != blank -%}<a href="mailto:{{ s.email }}">{{ s.email }}</a>{%- endif -%}
     {%- if s.instagram != blank -%}<a href="{{ s.instagram }}" target="_blank" rel="noopener">Instagram</a>{%- endif -%}
   </footer>
@@ -58,32 +31,14 @@
   .tb__bar { background: var(--terra-castanho); color: var(--terra-creme); display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 10px 24px; font-size: 14px; letter-spacing: .04em; }
   .tb__entrar { background: transparent; border: 1.5px solid var(--terra-creme); color: var(--terra-creme); border-radius: 999px; padding: 6px 16px; min-height: 36px; font: inherit; font-weight: 600; cursor: pointer; }
   .tb__entrar:hover { background: var(--terra-creme); color: var(--terra-castanho); }
-  .tb__main { flex: 1; width: 100%; max-width: 880px; margin: 0 auto; padding: 64px 24px 56px; box-sizing: border-box; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 22px; }
-  .tb__logo { width: min(520px, 80vw); height: auto; display: block; }
-  .tb__titulo { font-family: "Bowlby One SC", Impact, sans-serif; font-weight: 400; font-size: clamp(40px, 7vw, 88px); line-height: 1; margin: 12px 0 0; letter-spacing: .01em; }
-  .tb__texto { font-size: 19px; max-width: 34em; }
-  .tb__texto p { margin: 0; }
-  .tb__en { margin: -8px 0 0; font-size: 15px; opacity: .75; }
-  .tb__rolo { margin: 18px 0 0; width: 100%; display: flex; flex-direction: column; align-items: center; gap: 10px; }
-  .tb__tira { display: flex; gap: 6px; padding: 14px 12px; background: var(--terra-castanho); border-radius: 4px; max-width: 100%; overflow: hidden; position: relative;
-    background-image: radial-gradient(circle, var(--terra-areia) 2.2px, transparent 2.6px), radial-gradient(circle, var(--terra-areia) 2.2px, transparent 2.6px);
-    background-size: 14px 10px, 14px 10px; background-repeat: repeat-x; background-position: 4px 2px, 4px calc(100% - 2px); }
-  .tb__frame { width: 44px; height: 32px; flex: none; border-radius: 2px; background: rgba(248,242,224,.12); position: relative; display: flex; align-items: flex-end; justify-content: flex-end; }
-  .tb__frame.is-feito { background: var(--terra-terracota); }
-  .tb__frame em { font-style: normal; font-size: 9px; color: var(--terra-creme); opacity: .8; padding: 1px 3px; }
-  .tb__rolo figcaption { font-size: 13px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--terra-terracota); }
-  .tb__news { margin-top: 20px; width: 100%; max-width: 520px; display: flex; flex-direction: column; gap: 10px; }
-  .tb__news-titulo { margin: 0; font-weight: 700; }
-  .tb__news form { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
-  .tb__news input[type=email] { flex: 1 1 240px; min-height: 48px; border-radius: 999px; border: 2px solid var(--terra-castanho); background: var(--terra-creme); color: var(--terra-castanho); padding: 0 20px; font: inherit; }
-  .tb__news button { min-height: 48px; padding: 0 24px; border-radius: 999px; border: 0; background: var(--terra-azul); color: var(--terra-creme); font: inherit; font-weight: 600; cursor: pointer; }
-  .tb__news button:hover { background: var(--terra-azul-escuro); }
-  .tb__ok { margin: 0; font-weight: 600; }
-  .tb__erro { flex-basis: 100%; margin: 0; color: var(--terra-terracota); font-weight: 600; }
+  .tb__main { flex: 1; width: 100%; max-width: 880px; margin: 0 auto; padding: 64px 24px 56px; box-sizing: border-box; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; gap: 22px; }
+  .tb__logo { width: min(520px, 50%); height: auto; display: block; }
+  .tb__titulo { font-family: "Bowlby One SC", Impact, sans-serif; font-weight: 400; font-size: 34px; line-height: 1; margin: 12px 0 0; letter-spacing: .01em; }
+  .tb__sub { margin: -8px 0 0; font-size: 15px; opacity: .75; }
   .tb__footer { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px 28px; padding: 24px; font-size: 14px; border-top: 1px solid rgba(72,25,28,.2); }
   .tb__footer a { color: var(--terra-castanho); }
   .tb__footer a:hover { color: var(--terra-azul); }
-  @media (max-width: 600px) { .tb__frame { width: 30px; height: 24px; } .tb__main { padding-top: 40px; } }
+  @media (max-width: 600px) { .tb__logo { width: 80%; } }
 </style>
 
 {% schema %}
@@ -91,19 +46,12 @@
   "name": "Terra · Em breve",
   "tag": "section",
   "settings": [
-    { "type": "text", "id": "antetitulo", "label": "Barra de topo", "default": "Laboratório de filme · Bonfim, Porto" },
-    { "type": "text", "id": "titulo", "label": "Título", "default": "Em revelação" },
-    { "type": "richtext", "id": "texto", "label": "Texto", "default": "<p>Estamos a preparar o laboratório. C-41, P&B, E-6 e ECN-2, revelados à mão em Bonfim, no Porto.</p>" },
-    { "type": "text", "id": "texto_en", "label": "Texto em inglês", "default": "Work in progress. A film lab opening soon in Porto." },
-    { "type": "header", "content": "Rolo de progresso" },
-    { "type": "range", "id": "fotogramas_total", "label": "Fotogramas na tira", "min": 6, "max": 16, "step": 1, "default": 12 },
-    { "type": "range", "id": "fotogramas_feitos", "label": "Fotogramas já expostos", "min": 0, "max": 16, "step": 1, "default": 7 },
-    { "type": "text", "id": "rolo_legenda", "label": "Legenda do rolo", "default": "Rolo em curso" },
-    { "type": "header", "content": "Newsletter e contactos" },
-    { "type": "text", "id": "news_titulo", "label": "Título da newsletter", "default": "Avisamos quando abrirmos." },
-    { "type": "text", "id": "morada", "label": "Morada", "default": "Rua Duque de Saldanha 345 · 4300-465 Porto" },
+    { "type": "text", "id": "antetitulo", "label": "Barra de topo", "default": "Community Film Lab - Porto" },
+    { "type": "image_picker", "id": "logo", "label": "Logo (opcional, substitui o logo Terra Film Lab)" },
+    { "type": "text", "id": "titulo", "label": "Título", "default": "work in progress" },
+    { "type": "text", "id": "subtitulo", "label": "Subtítulo", "default": "A film lab opening soon in Porto." },
     { "type": "text", "id": "email", "label": "Email", "default": "hello@terrafilmlab.com" },
-    { "type": "url", "id": "instagram", "label": "Instagram" }
+    { "type": "url", "id": "instagram", "label": "Instagram (opcional)" }
   ],
   "presets": [{ "name": "Terra · Em breve" }]
 }
