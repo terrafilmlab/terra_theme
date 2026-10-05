@@ -14,7 +14,8 @@
           "settings": {
             "titulo": "C-41",
             "subtitulo": "Negativo a cores · 35mm, 120",
-            "preco": "desde X €"
+            "preco": "desde 6 €",
+            "link": "shopify://products/revelacao-c41"
           }
         },
         "pb": {
@@ -22,7 +23,8 @@
           "settings": {
             "titulo": "P&B",
             "subtitulo": "Preto e branco · 35mm, 120",
-            "preco": "desde X €"
+            "preco": "desde 8 €",
+            "link": "shopify://products/revelacao-pb"
           }
         },
         "e6": {
@@ -30,7 +32,8 @@
           "settings": {
             "titulo": "E-6",
             "subtitulo": "Diapositivo · 35mm, 120",
-            "preco": "desde X €"
+            "preco": "desde 12 €",
+            "link": "shopify://products/revelacao-e6"
           }
         },
         "ecn2": {
@@ -38,7 +41,8 @@
           "settings": {
             "titulo": "ECN-2",
             "subtitulo": "Película de cinema · 35mm",
-            "preco": "desde X €"
+            "preco": "desde 14 €",
+            "link": "shopify://products/revelacao-ecn2"
           }
         }
       },
