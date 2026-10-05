@@ -1,0 +1,54 @@
+{%- assign s = section.settings -%}
+<section class="t-section t-bg-{{ s.fundo }}">
+  <div class="t-wrap">
+    <div class="t-head">
+      <h2 class="t-display t-h2">{{ s.titulo }}</h2>
+      {%- if s.colecao != blank and s.link_texto != blank -%}<a href="{{ s.colecao.url }}">{{ s.link_texto }}</a>{%- endif -%}
+    </div>
+    <div class="t-row" style="gap: 32px 20px;">
+      {%- if s.colecao != blank -%}
+        {%- for product in s.colecao.products limit: s.limite -%}
+          <a class="t-product" href="{{ product.url }}">
+            <div class="t-photo">
+              {%- if product.featured_image -%}
+                {{ product.featured_image | image_url: width: 700 | image_tag: loading: 'lazy', sizes: '(min-width: 990px) 25vw, 50vw', widths: '300, 500, 700', alt: product.featured_image.alt | default: product.title }}
+              {%- else -%}
+                {{ 'product-1' | placeholder_svg_tag }}
+              {%- endif -%}
+              {%- if product.tags contains 'marca-propria' -%}
+                <span class="t-badge">Marca própria</span>
+              {%- elsif product.tags contains 'novo' -%}
+                <span class="t-badge t-badge--azul">Novo</span>
+              {%- elsif product.compare_at_price > product.price -%}
+                <span class="t-badge">Promoção</span>
+              {%- endif -%}
+            </div>
+            <span class="t-product__title">{{ product.title }}</span>
+            <span class="t-product__price">{%- if product.price_varies -%}desde {% endif -%}{{ product.price | money }}</span>
+          </a>
+        {%- endfor -%}
+      {%- else -%}
+        {%- for i in (1..4) -%}
+          <div class="t-product"><div class="t-photo">{{ 'product-1' | placeholder_svg_tag }}</div><span class="t-product__title">Escolhe uma coleção</span></div>
+        {%- endfor -%}
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Terra · Produtos",
+  "tag": "div",
+  "settings": [
+    { "type": "text", "id": "titulo", "label": "Título", "default": "Película" },
+    { "type": "collection", "id": "colecao", "label": "Coleção" },
+    { "type": "range", "id": "limite", "label": "Número de produtos", "min": 2, "max": 12, "step": 1, "default": 4 },
+    { "type": "text", "id": "link_texto", "label": "Texto do link", "default": "Ver a loja" },
+    { "type": "select", "id": "fundo", "label": "Fundo", "default": "areia", "options": [
+      { "value": "areia", "label": "Areia" }, { "value": "creme", "label": "Creme" }
+    ] }
+  ],
+  "presets": [{ "name": "Terra · Produtos" }]
+}
+{% endschema %}

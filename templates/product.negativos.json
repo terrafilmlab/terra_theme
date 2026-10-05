@@ -1,0 +1,6 @@
+{
+  "sections": {
+    "pedido": { "type": "terra-pedido-negativos", "settings": { "meses_arquivo": 3 } }
+  },
+  "order": ["pedido"]
+}

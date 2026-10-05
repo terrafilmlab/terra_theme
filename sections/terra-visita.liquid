@@ -1,0 +1,37 @@
+{%- assign s = section.settings -%}
+<section class="t-section t-bg-areia" id="lab">
+  <div class="t-wrap t-visit">
+    <div class="t-visit__text">
+      <h2 class="t-display t-h2">{{ s.titulo }}</h2>
+      <div class="t-lead t-rte">{{ s.morada }}</div>
+      <dl style="margin: 0;">
+        {%- if s.horario != blank -%}<dt>Horário</dt><dd class="t-rte">{{ s.horario }}</dd>{%- endif -%}
+        {%- if s.email != blank -%}<dt>Contacto</dt><dd><a href="mailto:{{ s.email }}">{{ s.email }}</a></dd>{%- endif -%}
+      </dl>
+      {%- if s.mapa != blank -%}<div><a class="t-btn2" href="{{ s.mapa }}" target="_blank" rel="noopener">Ver no mapa</a></div>{%- endif -%}
+    </div>
+    <div class="t-photo t-visit__media">
+      {%- if s.imagem != blank -%}
+        {{ s.imagem | image_url: width: 1400 | image_tag: loading: 'lazy', sizes: '(min-width: 990px) 55vw, 100vw', widths: '600, 900, 1400', alt: s.imagem.alt }}
+      {%- else -%}
+        {{ 'lifestyle-1' | placeholder_svg_tag }}
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Terra · Visita o lab",
+  "tag": "div",
+  "settings": [
+    { "type": "text", "id": "titulo", "label": "Título", "default": "Visita o lab" },
+    { "type": "richtext", "id": "morada", "label": "Morada", "default": "<p>Rua Duque de Saldanha 345<br>4300-465 Porto</p>" },
+    { "type": "richtext", "id": "horario", "label": "Horário", "default": "<p>Dias e horas de abertura</p>" },
+    { "type": "text", "id": "email", "label": "Email", "default": "hello@terrafilmlab.com" },
+    { "type": "url", "id": "mapa", "label": "Link do mapa" },
+    { "type": "image_picker", "id": "imagem", "label": "Foto do lab" }
+  ],
+  "presets": [{ "name": "Terra · Visita o lab" }]
+}
+{% endschema %}

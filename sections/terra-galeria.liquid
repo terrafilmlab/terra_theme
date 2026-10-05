@@ -1,0 +1,45 @@
+{%- assign s = section.settings -%}
+<section class="t-section t-bg-creme">
+  <div class="t-wrap t-stack" style="gap: 32px;">
+    <div class="t-stack" style="gap: 10px; max-width: 720px;">
+      <h2 class="t-display t-h2">{{ s.titulo }}</h2>
+      {%- if s.texto != blank -%}<p class="t-lead">{{ s.texto }}</p>{%- endif -%}
+    </div>
+    <div class="t-row t-gallery" style="gap: 16px;">
+      {%- for block in section.blocks -%}
+        <figure class="t-photo" style="margin: 0;" {{ block.shopify_attributes }}>
+          {%- if block.settings.imagem != blank -%}
+            {{ block.settings.imagem | image_url: width: 900 | image_tag: loading: 'lazy', sizes: '(min-width: 990px) 33vw, 100vw', widths: '400, 600, 900', alt: block.settings.imagem.alt }}
+          {%- else -%}
+            {{ 'lifestyle-1' | placeholder_svg_tag }}
+          {%- endif -%}
+          {%- if block.settings.legenda != blank -%}<figcaption>{{ block.settings.legenda }}</figcaption>{%- endif -%}
+        </figure>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Terra · Galeria",
+  "tag": "div",
+  "settings": [
+    { "type": "text", "id": "titulo", "label": "Título", "default": "Feito na Terra" },
+    { "type": "text", "id": "texto", "label": "Texto", "default": "Fotografias de clientes, organizadas por película. Para veres como cada uma se comporta antes de escolher." }
+  ],
+  "blocks": [
+    {
+      "type": "foto",
+      "name": "Foto",
+      "settings": [
+        { "type": "image_picker", "id": "imagem", "label": "Foto" },
+        { "type": "text", "id": "legenda", "label": "Legenda (película · autor)", "default": "Portra 400 · autor" }
+      ]
+    }
+  ],
+  "presets": [
+    { "name": "Terra · Galeria", "blocks": [ { "type": "foto" }, { "type": "foto" }, { "type": "foto" } ] }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,107 @@
+{%- comment -%}
+  Terra · Pedir os meus negativos. Modelo de produto "negativos".
+  O produto tem uma única variante cujo preço são os portes DPD da devolução e precisa de envio,
+  para o checkout pedir a morada. As escolhas do cliente seguem como propriedades da linha.
+{%- endcomment -%}
+{%- liquid
+  assign s = section.settings
+  assign v = product.selected_or_first_available_variant
+  assign sid = section.id
+-%}
+<section class="t-section t-bg-areia" style="padding-top: 24px;">
+  <div class="t-wrap t-order">
+    <div class="t-stack" style="flex: 1 1 440px; gap: 24px;">
+      <h1 class="t-display" style="font-size: clamp(40px, 5vw, 68px);">{{ product.title }}</h1>
+      <div class="t-lead t-rte">{{ product.description }}</div>
+      <div class="t-stack" style="gap: 16px;">
+        <div class="t-steps-num"><span class="t-display">01</span><span>Escolhes o que queres receber.</span></div>
+        <div class="t-steps-num"><span class="t-display">02</span><span>Pagas os portes DPD e confirmas a morada no checkout.</span></div>
+        <div class="t-steps-num"><span class="t-display">03</span><span>Juntamos os envelopes e enviamos. Recebes o código de seguimento por email.</span></div>
+      </div>
+      {%- if s.nota != blank -%}<div class="t-info t-rte" style="flex: none; padding: 18px 20px; font-size: 15px;">{{ s.nota }}</div>{%- endif -%}
+    </div>
+
+    <form class="t-stack" id="terra-neg-{{ sid }}" style="flex: 1 1 460px; background: var(--terra-creme); border-radius: 8px; padding: 32px; gap: 22px;" novalidate>
+      <div style="display: flex; justify-content: space-between; align-items: baseline; gap: 16px;">
+        <h2 class="t-display" style="font-size: 28px;">Devolução por DPD</h2>
+        <span style="color: var(--terra-azul); font-weight: 700; font-size: 22px;">{{ v.price | money }}</span>
+      </div>
+
+      <fieldset class="t-field">
+        <legend>O que queres receber?</legend>
+        <button type="button" class="t-choice" data-tipo="todos" aria-pressed="true">
+          <span class="t-choice__top"><span>Todos os negativos guardados</span></span>
+          <span class="t-choice__sub">Tudo o que tens no lab, num só envio.</span>
+        </button>
+        <button type="button" class="t-choice" data-tipo="esp" aria-pressed="false">
+          <span class="t-choice__top"><span>Encomendas específicas</span></span>
+          <span class="t-choice__sub">Indicas os números das encomendas.</span>
+        </button>
+      </fieldset>
+
+      <div class="t-field" data-esp hidden>
+        <label class="t-label" for="enc-{{ sid }}" style="margin: 0;">Números das encomendas</label>
+        <input class="t-input" id="enc-{{ sid }}" type="text" placeholder="Ex.: #1042, #1057">
+        <span class="t-small">Estão no email de confirmação de cada encomenda.</span>
+      </div>
+
+      <div class="t-field">
+        <label class="t-label" for="mail-{{ sid }}" style="margin: 0;">Email usado nas encomendas</label>
+        <input class="t-input" id="mail-{{ sid }}" type="email" autocomplete="email" placeholder="o.teu@email.pt" {% if customer %}value="{{ customer.email }}"{% endif %}>
+      </div>
+
+      <button type="submit" class="t-btn t-btn--full" {% unless v.available %}disabled{% endunless %}>Pedir devolução</button>
+      <p class="t-error" data-erro hidden></p>
+      <p class="t-small">Os negativos ficam guardados {{ s.meses_arquivo }} meses a contar da data em que os scans são enviados.</p>
+    </form>
+  </div>
+</section>
+
+<script>
+  (function () {
+    var form = document.getElementById('terra-neg-{{ sid }}');
+    if (!form) return;
+    var tipo = 'todos';
+    var esp = form.querySelector('[data-esp]');
+    var erro = form.querySelector('[data-erro]');
+    form.addEventListener('click', function (e) {
+      var b = e.target.closest('[data-tipo]');
+      if (!b) return;
+      tipo = b.dataset.tipo;
+      form.querySelectorAll('[data-tipo]').forEach(function (x) { x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
+      esp.hidden = tipo !== 'esp';
+    });
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var enc = document.getElementById('enc-{{ sid }}').value.trim();
+      var mail = document.getElementById('mail-{{ sid }}').value.trim();
+      erro.hidden = true;
+      if (!mail || mail.indexOf('@') < 1) { erro.textContent = 'Indica o email que usaste nas encomendas.'; erro.hidden = false; return; }
+      if (tipo === 'esp' && !enc) { erro.textContent = 'Indica pelo menos um número de encomenda.'; erro.hidden = false; return; }
+      var props = { 'Pedido': tipo === 'todos' ? 'Todos os negativos guardados' : 'Encomendas específicas', 'Email das encomendas': mail };
+      if (tipo === 'esp') props['Encomendas'] = enc;
+      fetch({{ routes.cart_add_url | append: '.js' | json }}, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({ items: [{ id: {{ v.id }}, quantity: 1, properties: props }] })
+      })
+        .then(function (r) {
+          if (!r.ok) return r.json().then(function (j) { throw new Error(j.description || 'Erro'); });
+          window.location.href = '/checkout';
+        })
+        .catch(function (err) { erro.textContent = 'Não foi possível continuar: ' + err.message; erro.hidden = false; });
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Terra · Pedir negativos",
+  "tag": "div",
+  "settings": [
+    { "type": "number", "id": "meses_arquivo", "label": "Meses de arquivo grátis", "default": 3 },
+    { "type": "richtext", "id": "nota", "label": "Nota", "default": "<p>Preferes vir buscar? Passa pelo lab na Rua Duque de Saldanha 345. Não precisas de fazer pedido.</p>" }
+  ],
+  "presets": [{ "name": "Terra · Pedir negativos" }]
+}
+{% endschema %}

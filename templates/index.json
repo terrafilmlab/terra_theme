@@ -1,0 +1,43 @@
+{
+  "sections": {
+    "hero": { "type": "terra-hero", "settings": { "link2": "#como-funciona" } },
+    "processos": {
+      "type": "terra-processos",
+      "blocks": {
+        "c41": { "type": "processo", "settings": { "titulo": "C-41", "subtitulo": "Negativo a cores · 35mm, 120", "preco": "desde X €" } },
+        "pb": { "type": "processo", "settings": { "titulo": "P&B", "subtitulo": "Preto e branco · 35mm, 120", "preco": "desde X €" } },
+        "e6": { "type": "processo", "settings": { "titulo": "E-6", "subtitulo": "Diapositivo · 35mm, 120", "preco": "desde X €" } },
+        "ecn2": { "type": "processo", "settings": { "titulo": "ECN-2", "subtitulo": "Película de cinema · 35mm", "preco": "desde X €" } }
+      },
+      "block_order": ["c41", "pb", "e6", "ecn2"],
+      "settings": { "fundo": "creme" }
+    },
+    "como": {
+      "type": "terra-como-funciona",
+      "blocks": {
+        "balcao": { "type": "caminho", "settings": { "titulo": "Entregas no lab", "passos": "<ol><li>Encomendas online o processo e o scan.</li><li>Trazes os rolos à Rua Duque de Saldanha 345, em Bonfim.</li><li>Sem portes, sem espera ao balcão.</li></ol>" } },
+        "dpd": { "type": "caminho", "settings": { "titulo": "Envias pela DPD", "selo": "Grátis a partir de 3 rolos", "passos": "<ol><li>Encomendas online e escolhes envio DPD.</li><li>Recebes por email a etiqueta e a folha de envio com o teu código.</li><li>Deixas o envelope num ponto DPD Pickup. Com 1 ou 2 rolos pagas os portes, a partir do 3.º é por nossa conta.</li></ol>" } },
+        "p1": { "type": "passo", "settings": { "titulo": "01 · Revelamos", "texto": "Cada rolo é etiquetado e acompanhado em todas as fases." } },
+        "p2": { "type": "passo", "settings": { "titulo": "02 · Scans por email", "texto": "Uma galeria privada para ver e descarregar durante 3 dias." } },
+        "p3": { "type": "passo", "settings": { "titulo": "03 · Negativos", "texto": "Guardamos 3 meses sem custo. Levantas no lab ou pedes por DPD quando quiseres." } }
+      },
+      "block_order": ["balcao", "dpd", "p1", "p2", "p3"],
+      "settings": {}
+    },
+    "scan10k": { "type": "terra-destaque", "settings": { "fundo": "castanho" } },
+    "pelicula": { "type": "terra-produtos", "settings": { "titulo": "Película", "limite": 4 } },
+    "galeria": {
+      "type": "terra-galeria",
+      "blocks": {
+        "f1": { "type": "foto", "settings": { "legenda": "Portra 400 · autor" } },
+        "f2": { "type": "foto", "settings": { "legenda": "HP5 Plus · autor" } },
+        "f3": { "type": "foto", "settings": { "legenda": "Terra 500T · autor" } }
+      },
+      "block_order": ["f1", "f2", "f3"],
+      "settings": {}
+    },
+    "visita": { "type": "terra-visita", "settings": {} },
+    "newsletter": { "type": "terra-newsletter", "settings": {} }
+  },
+  "order": ["hero", "processos", "como", "scan10k", "pelicula", "galeria", "visita", "newsletter"]
+}

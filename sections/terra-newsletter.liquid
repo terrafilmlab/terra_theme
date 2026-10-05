@@ -1,0 +1,32 @@
+{%- assign s = section.settings -%}
+<section class="t-section t-bg-azul" style="padding-block: 64px;">
+  <div class="t-wrap t-news">
+    <div class="t-stack" style="gap: 8px; flex: 1 1 360px;">
+      <h2 class="t-display" style="font-size: 34px;">{{ s.titulo }}</h2>
+      {%- if s.texto != blank -%}<p style="margin: 0;">{{ s.texto }}</p>{%- endif -%}
+    </div>
+    {%- form 'customer', id: 'terra-newsletter' -%}
+      <input type="hidden" name="contact[tags]" value="newsletter">
+      {%- if form.posted_successfully? -%}
+        <p style="margin: 0; font-weight: 600;">Obrigado! Ficas a par das novidades.</p>
+      {%- else -%}
+        <label for="terra-nl-email" class="t-visually-hidden">Email</label>
+        <input id="terra-nl-email" type="email" name="contact[email]" required autocomplete="email" placeholder="o.teu@email.pt">
+        <button type="submit">Subscrever</button>
+        {%- if form.errors -%}<p class="t-error" style="color: var(--terra-creme); flex-basis: 100%;">{{ form.errors | default_errors }}</p>{%- endif -%}
+      {%- endif -%}
+    {%- endform -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Terra · Newsletter",
+  "tag": "div",
+  "settings": [
+    { "type": "text", "id": "titulo", "label": "Título", "default": "Novidades do lab" },
+    { "type": "text", "id": "texto", "label": "Texto", "default": "Película nova, workshops e prazos. Uma vez por mês, no máximo." }
+  ],
+  "presets": [{ "name": "Terra · Newsletter" }]
+}
+{% endschema %}

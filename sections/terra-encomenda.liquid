@@ -1,0 +1,304 @@
+{%- comment -%}
+  Terra · Configurador de encomenda de revelação.
+  Usado no modelo de produto "revelacao". O produto tem as opções Formato e Scan (variantes).
+  Extras, envio DPD para o lab e devolução de negativos são produtos à parte, escolhidos nas definições da secção,
+  e entram no carrinho como linhas próprias. O envio grátis a partir de N rolos é aplicado no checkout
+  por um desconto automático (compra N da coleção de revelação, recebe o produto de envio a 100%).
+{%- endcomment -%}
+{%- liquid
+  assign s = section.settings
+  assign v0 = product.selected_or_first_available_variant
+  assign envio = s.envio_produto.selected_or_first_available_variant
+  assign devolucao = s.devolucao_produto.selected_or_first_available_variant
+  assign sid = section.id
+-%}
+
+<section class="t-section t-bg-areia" style="padding-top: 24px;">
+  <div class="t-wrap t-stack" style="gap: 72px;">
+    <div class="t-order">
+      <div class="t-order__media">
+        <div class="t-photo t-photo--main">
+          {%- if product.featured_media -%}
+            {{ product.featured_media | image_url: width: 1400 | image_tag: loading: 'eager', sizes: '(min-width: 990px) 50vw, 100vw', widths: '600, 900, 1200, 1400', alt: product.featured_media.alt | default: product.title }}
+          {%- else -%}
+            {{ 'image' | placeholder_svg_tag }}
+          {%- endif -%}
+        </div>
+        {%- if product.media.size > 1 -%}
+          <div class="t-order__thumbs">
+            {%- for m in product.media offset: 1 limit: 3 -%}
+              <div class="t-photo">{{ m | image_url: width: 500 | image_tag: loading: 'lazy', sizes: '15vw', alt: m.alt | default: product.title }}</div>
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
+      </div>
+
+      <form class="t-order__form" id="terra-order-{{ sid }}" novalidate>
+        <div class="t-stack" style="gap: 10px;">
+          <h1 class="t-display" style="font-size: clamp(40px, 5vw, 64px);">{{ product.title }}</h1>
+          {%- if product.description != blank -%}<div class="t-rte">{{ product.description }}</div>{%- endif -%}
+          <span style="color: var(--terra-azul); font-weight: 700; font-size: 22px;" data-preco-unit>{{ v0.price | money }} por rolo</span>
+        </div>
+
+        {%- unless product.has_only_default_variant -%}
+          {%- for option in product.options_with_values -%}
+            {%- assign oi = forloop.index0 -%}
+            <fieldset class="t-field">
+              <legend>{{ option.name }}</legend>
+              <div class="t-pills">
+                {%- for value in option.values -%}
+                  <button type="button" class="t-pill" data-opt="{{ oi }}" data-val="{{ value | escape }}" aria-pressed="{% if v0.options[oi] == value %}true{% else %}false{% endif %}">{{ value }}</button>
+                {%- endfor -%}
+              </div>
+            </fieldset>
+          {%- endfor -%}
+        {%- endunless -%}
+
+        {%- assign tem_extras = false -%}
+        {%- for block in section.blocks -%}{%- if block.type == 'extra' and block.settings.produto != blank -%}{%- assign tem_extras = true -%}{%- endif -%}{%- endfor -%}
+        {%- if tem_extras -%}
+          <fieldset class="t-field">
+            <legend>Extras</legend>
+            {%- for block in section.blocks -%}
+              {%- if block.type == 'extra' and block.settings.produto != blank -%}
+                {%- assign ev = block.settings.produto.selected_or_first_available_variant -%}
+                <label class="t-check" {{ block.shopify_attributes }}>
+                  <input type="checkbox" data-extra="{{ ev.id }}" data-preco="{{ ev.price }}">
+                  <span>{{ block.settings.rotulo | default: block.settings.produto.title }}</span>
+                  <span style="font-weight: 600;">+ {{ ev.price | money }} / rolo</span>
+                </label>
+              {%- endif -%}
+            {%- endfor -%}
+          </fieldset>
+        {%- endif -%}
+
+        <div class="t-field">
+          <span class="t-label" id="rolos-label-{{ sid }}">Quantos rolos?</span>
+          <div class="t-stepper" role="group" aria-labelledby="rolos-label-{{ sid }}">
+            <button type="button" data-rolos="-1" aria-label="Menos um rolo">−</button>
+            <output data-rolos-out aria-live="polite">1</output>
+            <button type="button" data-rolos="1" aria-label="Mais um rolo">+</button>
+          </div>
+        </div>
+
+        <fieldset class="t-field">
+          <legend>Como chegam os rolos ao lab?</legend>
+          <button type="button" class="t-choice" data-chegada="lab" aria-pressed="false">
+            <span class="t-choice__top"><span>Entrego no lab</span><span>Grátis</span></span>
+            <span class="t-choice__sub">{{ s.morada_balcao }}</span>
+          </button>
+          {%- if envio -%}
+            <button type="button" class="t-choice" data-chegada="dpd" aria-pressed="true">
+              <span class="t-choice__top"><span>Envio pela DPD</span><span data-envio-preco>{{ envio.price | money }}</span></span>
+              <span class="t-choice__sub">Etiqueta e folha de envio por email. Grátis a partir de {{ s.limiar }} rolos.</span>
+            </button>
+            <div class="t-progress" data-progress>
+              <span data-progress-msg></span>
+              <div class="t-progress__bar"><span data-progress-bar style="width: 0%;"></span></div>
+            </div>
+          {%- endif -%}
+        </fieldset>
+
+        <fieldset class="t-field">
+          <legend>E os negativos?</legend>
+          <button type="button" class="t-choice" data-neg="guardar" aria-pressed="true">
+            <span class="t-choice__top"><span>Guardar no lab</span><span>Grátis</span></span>
+            <span class="t-choice__sub">Ficam connosco {{ s.meses_arquivo }} meses. Pedes quando quiseres.</span>
+          </button>
+          <button type="button" class="t-choice" data-neg="levantar" aria-pressed="false">
+            <span class="t-choice__top"><span>Levantar no lab</span><span>Grátis</span></span>
+            <span class="t-choice__sub">Avisamos por email quando estiverem prontos.</span>
+          </button>
+          {%- if devolucao -%}
+            <button type="button" class="t-choice" data-neg="dpd" aria-pressed="false">
+              <span class="t-choice__top"><span>Devolver pela DPD</span><span>{{ devolucao.price | money }}</span></span>
+              <span class="t-choice__sub">Seguem pela DPD depois do scan.</span>
+            </button>
+          {%- endif -%}
+        </fieldset>
+
+        <div class="t-total"><span>Total estimado</span><span data-total>{{ v0.price | money }}</span></div>
+        <button type="submit" class="t-btn t-btn--full" data-submit>Adicionar ao carrinho</button>
+        <p class="t-error" data-erro hidden></p>
+        <p class="t-small">Pagamento no momento da encomenda. Os portes de ida e de devolução aparecem como linhas próprias no carrinho.</p>
+        <noscript><p class="t-error">Para encomendar precisas de ter o JavaScript ativo no navegador.</p></noscript>
+      </form>
+    </div>
+
+    {%- assign tem_info = false -%}
+    {%- for block in section.blocks -%}{%- if block.type == 'info' -%}{%- assign tem_info = true -%}{%- endif -%}{%- endfor -%}
+    {%- if tem_info -%}
+      <div class="t-row">
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'info' -%}
+            <div class="t-info" {{ block.shopify_attributes }}>
+              <h2 class="t-display" style="font-size: 24px;">{{ block.settings.titulo }}</h2>
+              <div class="t-rte">{{ block.settings.texto }}</div>
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+<script type="application/json" id="terra-order-data-{{ sid }}">
+  {
+    "variants": {{ product.variants | json }},
+    "envio": {% if envio %}{ "id": {{ envio.id }}, "price": {{ envio.price }} }{% else %}null{% endif %},
+    "devolucao": {% if devolucao %}{ "id": {{ devolucao.id }}, "price": {{ devolucao.price }} }{% else %}null{% endif %},
+    "limiar": {{ s.limiar | default: 3 }},
+    "currency": {{ cart.currency.iso_code | json }},
+    "cartUrl": {{ routes.cart_url | json }},
+    "cartJs": {{ routes.cart_url | append: '.js' | json }},
+    "addUrl": {{ routes.cart_add_url | append: '.js' | json }}
+  }
+</script>
+<script>
+  (function () {
+    var form = document.getElementById('terra-order-{{ sid }}');
+    if (!form) return;
+    var data = JSON.parse(document.getElementById('terra-order-data-{{ sid }}').textContent);
+    var fmt = new Intl.NumberFormat('pt-PT', { style: 'currency', currency: data.currency });
+    var money = function (c) { return fmt.format(c / 100); };
+    var $ = function (sel) { return form.querySelector(sel); };
+    var $$ = function (sel) { return Array.prototype.slice.call(form.querySelectorAll(sel)); };
+
+    var opts = [];
+    $$('[data-opt][aria-pressed="true"]').forEach(function (b) { opts[+b.dataset.opt] = b.dataset.val; });
+    var state = { rolos: 1, chegada: data.envio ? 'dpd' : 'lab', neg: 'guardar' };
+
+    function findVariant(o) {
+      if (!data.variants.length) return null;
+      if (data.variants.length === 1 && !o.length) return data.variants[0];
+      return data.variants.find(function (v) { return v.options.every(function (val, i) { return val === o[i]; }); }) || null;
+    }
+
+    function render() {
+      var v = findVariant(opts);
+      $$('[data-opt]').forEach(function (b) {
+        var i = +b.dataset.opt;
+        b.setAttribute('aria-pressed', opts[i] === b.dataset.val ? 'true' : 'false');
+        var trial = opts.slice(); trial[i] = b.dataset.val;
+        var tv = findVariant(trial);
+        b.disabled = !tv || !tv.available;
+      });
+      $('[data-rolos-out]').textContent = state.rolos;
+      $$('[data-chegada]').forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.chegada === state.chegada ? 'true' : 'false'); });
+      $$('[data-neg]').forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.neg === state.neg ? 'true' : 'false'); });
+
+      var gratis = state.rolos >= data.limiar;
+      var prog = $('[data-progress]');
+      if (prog) {
+        prog.hidden = state.chegada !== 'dpd';
+        var falta = Math.max(0, data.limiar - state.rolos);
+        prog.classList.toggle('t-progress--ok', gratis);
+        $('[data-progress-msg]').textContent = gratis
+          ? 'O envio para o lab é por nossa conta.'
+          : 'Falta' + (falta > 1 ? 'm ' : ' ') + falta + (falta > 1 ? ' rolos' : ' rolo') + ' para o envio ser grátis.';
+        $('[data-progress-bar]').style.width = Math.min(100, Math.round(state.rolos / data.limiar * 100)) + '%';
+        $('[data-envio-preco]').textContent = gratis ? 'Grátis' : money(data.envio.price);
+      }
+
+      var total = 0;
+      if (v) {
+        total += v.price * state.rolos;
+        $('[data-preco-unit]').textContent = money(v.price) + ' por rolo';
+      }
+      $$('[data-extra]').forEach(function (c) { if (c.checked) total += (+c.dataset.preco) * state.rolos; });
+      if (state.chegada === 'dpd' && data.envio && !gratis) total += data.envio.price;
+      if (state.neg === 'dpd' && data.devolucao) total += data.devolucao.price;
+      $('[data-total]').textContent = money(total);
+
+      var sub = $('[data-submit]');
+      sub.disabled = !v || !v.available;
+      sub.textContent = !v ? 'Combinação indisponível' : (!v.available ? 'Esgotado' : 'Adicionar ao carrinho');
+    }
+
+    form.addEventListener('click', function (e) {
+      var b = e.target.closest('button');
+      if (!b || !form.contains(b)) return;
+      if (b.dataset.opt !== undefined) { opts[+b.dataset.opt] = b.dataset.val; }
+      else if (b.dataset.rolos) { state.rolos = Math.max(1, Math.min(30, state.rolos + (+b.dataset.rolos))); }
+      else if (b.dataset.chegada) { state.chegada = b.dataset.chegada; }
+      else if (b.dataset.neg) { state.neg = b.dataset.neg; }
+      else { return; }
+      render();
+    });
+    form.addEventListener('change', render);
+
+    var labels = {
+      chegada: { lab: 'Entrego no lab', dpd: 'Envio pela DPD' },
+      neg: { guardar: 'Guardar no lab', levantar: 'Levantar no lab', dpd: 'Devolver pela DPD' }
+    };
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var v = findVariant(opts);
+      if (!v) return;
+      var sub = $('[data-submit]'), erro = $('[data-erro]');
+      sub.disabled = true; erro.hidden = true;
+      fetch(data.cartJs, { headers: { Accept: 'application/json' } })
+        .then(function (r) { return r.json(); })
+        .then(function (cart) {
+          var noCarrinho = function (id) { return cart.items.some(function (it) { return it.variant_id === id; }); };
+          var items = [{ id: v.id, quantity: state.rolos, properties: { 'Chegada dos rolos': labels.chegada[state.chegada], 'Negativos': labels.neg[state.neg] } }];
+          $$('[data-extra]').forEach(function (c) {
+            if (c.checked) items.push({ id: +c.dataset.extra, quantity: state.rolos, properties: { 'Para': v.name || '' } });
+          });
+          if (state.chegada === 'dpd' && data.envio && !noCarrinho(data.envio.id)) items.push({ id: data.envio.id, quantity: 1 });
+          if (state.neg === 'dpd' && data.devolucao && !noCarrinho(data.devolucao.id)) items.push({ id: data.devolucao.id, quantity: 1 });
+          return fetch(data.addUrl, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+            body: JSON.stringify({ items: items })
+          });
+        })
+        .then(function (r) {
+          if (!r.ok) return r.json().then(function (j) { throw new Error(j.description || j.message || 'Erro'); });
+          window.location.href = data.cartUrl;
+        })
+        .catch(function (err) {
+          erro.textContent = 'Não foi possível adicionar ao carrinho: ' + err.message;
+          erro.hidden = false;
+          sub.disabled = false;
+        });
+    });
+
+    render();
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Terra · Encomenda",
+  "tag": "div",
+  "settings": [
+    { "type": "header", "content": "Envio e devolução" },
+    { "type": "product", "id": "envio_produto", "label": "Produto: Envio para o lab · DPD" },
+    { "type": "number", "id": "limiar", "label": "Envio grátis a partir de (rolos)", "default": 3 },
+    { "type": "product", "id": "devolucao_produto", "label": "Produto: Devolução de negativos · DPD" },
+    { "type": "number", "id": "meses_arquivo", "label": "Meses de arquivo grátis", "default": 3 },
+    { "type": "text", "id": "morada_balcao", "label": "Texto da entrega no balcão", "default": "Rua Duque de Saldanha 345, Bonfim" }
+  ],
+  "blocks": [
+    {
+      "type": "extra",
+      "name": "Extra (por rolo)",
+      "settings": [
+        { "type": "product", "id": "produto", "label": "Produto do extra" },
+        { "type": "text", "id": "rotulo", "label": "Nome a mostrar (opcional)" }
+      ]
+    },
+    {
+      "type": "info",
+      "name": "Cartão de informação",
+      "settings": [
+        { "type": "text", "id": "titulo", "label": "Título", "default": "Prazos" },
+        { "type": "richtext", "id": "texto", "label": "Texto", "default": "<p>X dias úteis a contar da chegada dos rolos ao lab.</p>" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "Terra · Encomenda" }]
+}
+{% endschema %}

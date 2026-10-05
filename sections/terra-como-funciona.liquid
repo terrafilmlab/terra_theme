@@ -1,0 +1,72 @@
+{%- assign s = section.settings -%}
+<section class="t-section t-bg-areia" id="como-funciona">
+  <div class="t-wrap t-stack" style="gap: 40px;">
+    <div class="t-stack" style="gap: 12px; max-width: 720px;">
+      <h2 class="t-display t-h2">{{ s.titulo }}</h2>
+      {%- if s.intro != blank -%}<p class="t-lead">{{ s.intro }}</p>{%- endif -%}
+    </div>
+    <div class="t-row">
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'caminho' -%}
+          <div class="t-path" {{ block.shopify_attributes }}>
+            {%- if block.settings.selo != blank -%}<span class="t-badge">{{ block.settings.selo }}</span>{%- endif -%}
+            <h3 class="t-display t-h3">{{ block.settings.titulo }}</h3>
+            <div class="t-rte">{{ block.settings.passos }}</div>
+          </div>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+    <div class="t-row">
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'passo' -%}
+          <div class="t-step" {{ block.shopify_attributes }}>
+            <span class="t-display" style="font-size: 22px;">{{ block.settings.titulo }}</span>
+            <span>{{ block.settings.texto }}</span>
+          </div>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Terra · Como funciona",
+  "tag": "div",
+  "settings": [
+    { "type": "text", "id": "titulo", "label": "Título", "default": "Como funciona" },
+    { "type": "text", "id": "intro", "label": "Introdução", "default": "Encomendas online e escolhes como os rolos chegam até nós. O resto é connosco." }
+  ],
+  "blocks": [
+    {
+      "type": "caminho",
+      "name": "Caminho (balcão ou DPD)",
+      "settings": [
+        { "type": "text", "id": "titulo", "label": "Título", "default": "Entregas no lab" },
+        { "type": "text", "id": "selo", "label": "Selo (opcional)" },
+        { "type": "richtext", "id": "passos", "label": "Passos", "default": "<ol><li>Encomendas online o processo e o scan.</li><li>Trazes os rolos ao lab.</li></ol>" }
+      ]
+    },
+    {
+      "type": "passo",
+      "name": "Passo",
+      "settings": [
+        { "type": "text", "id": "titulo", "label": "Título", "default": "01 · Revelamos" },
+        { "type": "text", "id": "texto", "label": "Texto", "default": "Cada rolo é etiquetado e acompanhado em todas as fases." }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Terra · Como funciona",
+      "blocks": [
+        { "type": "caminho", "settings": { "titulo": "Entregas no lab", "passos": "<ol><li>Encomendas online o processo e o scan.</li><li>Trazes os rolos à Rua Duque de Saldanha 345, em Bonfim.</li><li>Sem portes, sem espera ao balcão.</li></ol>" } },
+        { "type": "caminho", "settings": { "titulo": "Envias pela DPD", "selo": "Grátis a partir de 3 rolos", "passos": "<ol><li>Encomendas online e escolhes envio DPD.</li><li>Recebes por email a etiqueta e a folha de envio com o teu código.</li><li>Deixas o envelope num ponto DPD Pickup. Com 1 ou 2 rolos pagas os portes, a partir do 3.º é por nossa conta.</li></ol>" } },
+        { "type": "passo", "settings": { "titulo": "01 · Revelamos", "texto": "Cada rolo é etiquetado e acompanhado em todas as fases." } },
+        { "type": "passo", "settings": { "titulo": "02 · Scans por email", "texto": "Uma galeria privada para ver e descarregar durante 3 dias." } },
+        { "type": "passo", "settings": { "titulo": "03 · Negativos", "texto": "Guardamos 3 meses sem custo. Levantas no lab ou pedes por DPD quando quiseres." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

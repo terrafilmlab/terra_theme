@@ -1,0 +1,37 @@
+{%- assign s = section.settings -%}
+<section class="t-section t-bg-{{ s.fundo }}">
+  <div class="t-wrap t-feature">
+    <div class="t-photo t-feature__media">
+      {%- if s.imagem != blank -%}
+        {{ s.imagem | image_url: width: 1600 | image_tag: loading: 'lazy', sizes: '(min-width: 990px) 55vw, 100vw', widths: '600, 900, 1200, 1600', alt: s.imagem.alt }}
+      {%- else -%}
+        {{ 'lifestyle-2' | placeholder_svg_tag }}
+      {%- endif -%}
+    </div>
+    <div class="t-feature__text">
+      {%- if s.eyebrow != blank -%}<p class="t-eyebrow">{{ s.eyebrow }}</p>{%- endif -%}
+      <h2 class="t-display t-feature__title">{{ s.titulo }}</h2>
+      <div class="t-lead t-rte">{{ s.texto }}</div>
+      {%- if s.botao != blank -%}<div><a class="t-btn" href="{{ s.link | default: '#' }}">{{ s.botao }}</a></div>{%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Terra · Destaque",
+  "tag": "div",
+  "settings": [
+    { "type": "select", "id": "fundo", "label": "Fundo", "default": "castanho", "options": [
+      { "value": "castanho", "label": "Castanho" }, { "value": "creme", "label": "Creme" }, { "value": "areia", "label": "Areia" }
+    ] },
+    { "type": "text", "id": "eyebrow", "label": "Antetítulo", "default": "Scan de alta resolução" },
+    { "type": "text", "id": "titulo", "label": "Título", "default": "Scan 10K" },
+    { "type": "richtext", "id": "texto", "label": "Texto", "default": "<p>Digitalização com câmara Fujifilm GFX, com cerca de 10 000 píxeis no lado maior e as bordas do negativo incluídas. Para imprimir em grande ou arquivar a sério.</p>" },
+    { "type": "text", "id": "botao", "label": "Botão", "default": "Juntar à encomenda" },
+    { "type": "url", "id": "link", "label": "Link do botão" },
+    { "type": "image_picker", "id": "imagem", "label": "Foto" }
+  ],
+  "presets": [{ "name": "Terra · Destaque" }]
+}
+{% endschema %}

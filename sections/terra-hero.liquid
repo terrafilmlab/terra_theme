@@ -1,0 +1,49 @@
+{%- assign s = section.settings -%}
+<section class="t-section t-bg-areia" style="padding-top: 32px;">
+  <div class="t-wrap t-hero">
+    <div class="t-hero__text">
+      {%- if s.eyebrow != blank -%}<p class="t-eyebrow">{{ s.eyebrow }}</p>{%- endif -%}
+      <h1 class="t-display t-h1">{{ s.titulo }}</h1>
+      {%- if s.texto != blank -%}<div class="t-lead t-rte">{{ s.texto }}</div>{%- endif -%}
+      <div class="t-row" style="gap: 12px;">
+        {%- if s.botao1 != blank -%}<a class="t-btn" href="{{ s.link1 | default: '#' }}">{{ s.botao1 }}</a>{%- endif -%}
+        {%- if s.botao2 != blank -%}<a class="t-btn2" href="{{ s.link2 | default: '#' }}">{{ s.botao2 }}</a>{%- endif -%}
+      </div>
+    </div>
+    <div class="t-hero__media">
+      <div class="t-photo t-hero__main">
+        {%- if s.imagem1 != blank -%}
+          {{ s.imagem1 | image_url: width: 1600 | image_tag: loading: 'eager', fetchpriority: 'high', sizes: '(min-width: 990px) 50vw, 100vw', widths: '600, 900, 1200, 1600', alt: s.imagem1.alt }}
+        {%- else -%}
+          {{ 'lifestyle-1' | placeholder_svg_tag }}
+        {%- endif -%}
+      </div>
+      <div class="t-photo t-hero__second">
+        {%- if s.imagem2 != blank -%}
+          {{ s.imagem2 | image_url: width: 800 | image_tag: loading: 'lazy', sizes: '25vw', widths: '400, 600, 800', alt: s.imagem2.alt }}
+        {%- else -%}
+          {{ 'lifestyle-2' | placeholder_svg_tag }}
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Terra · Hero",
+  "tag": "div",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Antetítulo", "default": "Laboratório de filme · Bonfim, Porto" },
+    { "type": "text", "id": "titulo", "label": "Título", "default": "Revelação e scan feitos à mão" },
+    { "type": "richtext", "id": "texto", "label": "Texto", "default": "<p>C-41, P&B, E-6 e ECN-2 em 35mm e 120. Entrega os rolos no balcão ou envia pela DPD, e recebe os scans por email.</p>" },
+    { "type": "text", "id": "botao1", "label": "Botão principal", "default": "Encomendar revelação" },
+    { "type": "url", "id": "link1", "label": "Link do botão principal" },
+    { "type": "text", "id": "botao2", "label": "Botão secundário", "default": "Como funciona" },
+    { "type": "url", "id": "link2", "label": "Link do botão secundário" },
+    { "type": "image_picker", "id": "imagem1", "label": "Foto principal" },
+    { "type": "image_picker", "id": "imagem2", "label": "Foto secundária (moldura)" }
+  ],
+  "presets": [{ "name": "Terra · Hero" }]
+}
+{% endschema %}

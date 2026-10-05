@@ -1,0 +1,41 @@
+<div class="t-prazos" role="region" aria-label="{{ section.settings.titulo | escape }}">
+  {%- if section.settings.titulo != blank -%}<strong>{{ section.settings.titulo }}</strong>{%- endif -%}
+  {%- for block in section.blocks -%}
+    <span {{ block.shopify_attributes }}>{{ block.settings.processo }} · {{ block.settings.prazo }}</span>
+  {%- endfor -%}
+  {%- if section.settings.nota != blank -%}<span class="t-prazos__nota">{{ section.settings.nota }}</span>{%- endif -%}
+</div>
+
+{% schema %}
+{
+  "name": "Terra · Barra de prazos",
+  "tag": "section",
+  "class": "t-prazos-section",
+  "enabled_on": { "groups": ["header"] },
+  "settings": [
+    { "type": "text", "id": "titulo", "label": "Título", "default": "Prazos atuais" },
+    { "type": "text", "id": "nota", "label": "Nota final", "default": "Envio DPD grátis a partir de 3 rolos" }
+  ],
+  "blocks": [
+    {
+      "type": "prazo",
+      "name": "Prazo",
+      "settings": [
+        { "type": "text", "id": "processo", "label": "Processo", "default": "C-41" },
+        { "type": "text", "id": "prazo", "label": "Prazo", "default": "X dias úteis" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Terra · Barra de prazos",
+      "blocks": [
+        { "type": "prazo", "settings": { "processo": "C-41" } },
+        { "type": "prazo", "settings": { "processo": "P&B" } },
+        { "type": "prazo", "settings": { "processo": "E-6" } },
+        { "type": "prazo", "settings": { "processo": "ECN-2" } }
+      ]
+    }
+  ]
+}
+{% endschema %}
