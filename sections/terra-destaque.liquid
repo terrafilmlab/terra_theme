@@ -9,6 +9,7 @@
       {%- endif -%}
     </div>
     <div class="t-feature__text">
+      {%- if s.ilu != blank and s.ilu != 'nenhuma' -%}<img class="t-ilu" src="{{ s.ilu | asset_url }}" alt="" loading="lazy" width="640" height="640" style="width: 84px; height: auto;">{%- endif -%}
       {%- if s.eyebrow != blank -%}<p class="t-eyebrow">{{ s.eyebrow }}</p>{%- endif -%}
       <h2 class="t-display t-feature__title">{{ s.titulo }}</h2>
       <div class="t-lead t-rte">{{ s.texto }}</div>
@@ -22,16 +23,125 @@
   "name": "Terra · Destaque",
   "tag": "div",
   "settings": [
-    { "type": "select", "id": "fundo", "label": "Fundo", "default": "castanho", "options": [
-      { "value": "castanho", "label": "Castanho" }, { "value": "creme", "label": "Creme" }, { "value": "areia", "label": "Areia" }
-    ] },
-    { "type": "text", "id": "eyebrow", "label": "Antetítulo", "default": "Scan de alta resolução" },
-    { "type": "text", "id": "titulo", "label": "Título", "default": "Scan 10K" },
-    { "type": "richtext", "id": "texto", "label": "Texto", "default": "<p>Digitalização com câmara Fujifilm GFX, com cerca de 10 000 píxeis no lado maior e as bordas do negativo incluídas. Para imprimir em grande ou arquivar a sério.</p>" },
-    { "type": "text", "id": "botao", "label": "Botão", "default": "Juntar à encomenda" },
-    { "type": "url", "id": "link", "label": "Link do botão" },
-    { "type": "image_picker", "id": "imagem", "label": "Foto" }
+    {
+      "type": "select",
+      "id": "fundo",
+      "label": "Fundo",
+      "default": "castanho",
+      "options": [
+        {
+          "value": "castanho",
+          "label": "Castanho"
+        },
+        {
+          "value": "creme",
+          "label": "Creme"
+        },
+        {
+          "value": "areia",
+          "label": "Areia"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "ilu",
+      "label": "Ilustração",
+      "default": "terra-ilu-40-cru.webp",
+      "options": [
+        {
+          "value": "nenhuma",
+          "label": "Nenhuma"
+        },
+        {
+          "value": "terra-ilu-04-castanho.webp",
+          "label": "Mão a entregar (castanho)"
+        },
+        {
+          "value": "terra-ilu-03-castanho.webp",
+          "label": "Caixa aberta (castanho)"
+        },
+        {
+          "value": "terra-ilu-37-castanho.webp",
+          "label": "Frasco do lab (castanho)"
+        },
+        {
+          "value": "terra-ilu-56-castanho.webp",
+          "label": "Scanner (castanho)"
+        },
+        {
+          "value": "terra-ilu-34-castanho.webp",
+          "label": "Pasta com foto (castanho)"
+        },
+        {
+          "value": "terra-ilu-61-castanho.webp",
+          "label": "Pasta cheia (castanho)"
+        },
+        {
+          "value": "terra-ilu-31-castanho.webp",
+          "label": "Caixa de película (castanho)"
+        },
+        {
+          "value": "terra-ilu-66-castanho.webp",
+          "label": "Rolo com braços (castanho)"
+        },
+        {
+          "value": "terra-ilu-01-cru.webp",
+          "label": "High five (claro)"
+        },
+        {
+          "value": "terra-ilu-40-cru.webp",
+          "label": "Estrela (claro)"
+        },
+        {
+          "value": "terra-ilu-49-cru.webp",
+          "label": "Mãos com câmara (claro)"
+        },
+        {
+          "value": "terra-ilu-70-cru.webp",
+          "label": "Sorrisos (claro)"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Antetítulo",
+      "default": "Scan de alta resolução"
+    },
+    {
+      "type": "text",
+      "id": "titulo",
+      "label": "Título",
+      "default": "Scan 10K"
+    },
+    {
+      "type": "richtext",
+      "id": "texto",
+      "label": "Texto",
+      "default": "<p>Digitalização com câmara Fujifilm GFX, com cerca de 10 000 píxeis no lado maior e as bordas do negativo incluídas. Para imprimir em grande ou arquivar a sério.</p>"
+    },
+    {
+      "type": "text",
+      "id": "botao",
+      "label": "Botão",
+      "default": "Juntar à encomenda"
+    },
+    {
+      "type": "url",
+      "id": "link",
+      "label": "Link do botão"
+    },
+    {
+      "type": "image_picker",
+      "id": "imagem",
+      "label": "Foto"
+    }
   ],
-  "presets": [{ "name": "Terra · Destaque" }]
+  "presets": [
+    {
+      "name": "Terra · Destaque"
+    }
+  ]
 }
 {% endschema %}

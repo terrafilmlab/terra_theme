@@ -1,9 +1,9 @@
 {%- comment -%}
-  Terra · fontes da marca, cores e folha de estilos própria.
-  Carregado em layout/theme.liquid depois das variáveis do tema, por isso sobrepõe-se a elas.
+  Terra · fontes da marca, cores (brand book 2026) e folha de estilos própria.
+  Carregado em layout/theme.liquid e layout/password.liquid depois das variáveis do tema, por isso sobrepõe-se a elas.
 {%- endcomment -%}
 <link rel="preload" href="{{ 'terra-gantari.woff2' | asset_url }}" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="{{ 'terra-bowlby-one-sc.woff2' | asset_url }}" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="{{ 'terra-zalando-xb.woff2' | asset_url }}" as="font" type="font/woff2" crossorigin>
 <style>
   @font-face {
     font-family: "Gantari";
@@ -13,29 +13,39 @@
     font-display: swap;
   }
   @font-face {
-    font-family: "Bowlby One SC";
-    src: url({{ 'terra-bowlby-one-sc.woff2' | asset_url }}) format("woff2");
-    font-weight: 400;
+    font-family: "Zalando Sans SemiExpanded";
+    src: url({{ 'terra-zalando-xb.woff2' | asset_url }}) format("woff2");
+    font-weight: 800;
     font-style: normal;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: "Zalando Sans SemiExpanded";
+    src: url({{ 'terra-zalando-xb-italic.woff2' | asset_url }}) format("woff2");
+    font-weight: 800;
+    font-style: italic;
     font-display: swap;
   }
   :root {
     --font-body--family: "Gantari", system-ui, sans-serif;
     --font-subheading--family: "Gantari", system-ui, sans-serif;
-    --font-heading--family: "Bowlby One SC", Impact, sans-serif;
-    --font-heading--weight: 400;
+    --font-heading--family: "Zalando Sans SemiExpanded", "Gantari", sans-serif;
+    --font-heading--weight: 800;
     --font-heading--style: normal;
-    --font-accent--family: "Bowlby One SC", Impact, sans-serif;
-    --font-accent--weight: 400;
+    --font-accent--family: "Zalando Sans SemiExpanded", "Gantari", sans-serif;
+    --font-accent--weight: 800;
     --font-accent--style: normal;
 
-    --terra-areia: #E8DFC7;
-    --terra-castanho: #48191C;
-    --terra-azul: #2E5D96;
+    /* Brand book 2026: Water, Sand, Film, Terra + preto e branco */
+    --terra-azul: #2E5D96;          /* Water */
     --terra-azul-escuro: #244B7A;
-    --terra-creme: #F8F2E0;
-    --terra-terracota: #8F4739;
-    --terra-foto: #D6C9A8;
+    --terra-creme: #F8F2E0;         /* Sand (texto claro sobre escuro) */
+    --terra-areia: #F8F2E0;         /* Sand (fundo das páginas) */
+    --terra-branco: #FFFEFA;        /* superfícies, cartões e campos */
+    --terra-terracota: #8F4739;     /* Film */
+    --terra-castanho: #48191C;      /* Terra */
+    --terra-preto: #0F0607;
+    --terra-foto: #EDE4CF;
   }
 </style>
 {{ 'terra.css' | asset_url | stylesheet_tag }}

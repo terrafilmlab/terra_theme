@@ -56,7 +56,7 @@
     data-testid="header-logo"
   >
     {%- if settings.logo == blank -%}
-      <img src="{{ 'terra-logo-castanho.png' | asset_url }}" alt="{{ shop.name | escape }}" class="header-logo__image" width="1400" height="617" style="height: {{ settings.logo_height }}px; width: auto;">
+      <img src="{{ 'terra-logo-main-castanho.webp' | asset_url }}" alt="{{ shop.name | escape }}" class="header-logo__image" width="1200" height="529" style="height: {{ settings.logo_height }}px; width: auto;">
     {%- else -%}
     {% render 'image',
       image: settings.logo,

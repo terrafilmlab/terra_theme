@@ -12,7 +12,7 @@
     {%- if s.logo != blank -%}
       {{ s.logo | image_url: width: 1040 | image_tag: class: 'tb__logo', alt: shop.name }}
     {%- else -%}
-      <img class="tb__logo" src="{{ 'terra-logo-filmlab.webp' | asset_url }}" alt="{{ shop.name | escape }}" width="2560" height="1129">
+      <img class="tb__logo" src="{{ 'terra-logo-filmlab-castanho.webp' | asset_url }}" alt="{{ shop.name | escape }}" width="1200" height="529">
     {%- endif -%}
     <h1 class="tb__titulo">{{ s.titulo }}</h1>
     {%- if s.subtitulo != blank -%}<p class="tb__sub">{{ s.subtitulo }}</p>{%- endif -%}
@@ -30,10 +30,10 @@
   .tb { min-height: 100vh; display: flex; flex-direction: column; background: var(--terra-areia); color: var(--terra-castanho); font-family: "Gantari", system-ui, sans-serif; font-size: 17px; line-height: 1.5; }
   .tb__bar { background: var(--terra-castanho); color: var(--terra-creme); display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 10px 24px; font-size: 14px; letter-spacing: .04em; }
   .tb__entrar { background: transparent; border: 1.5px solid var(--terra-creme); color: var(--terra-creme); border-radius: 999px; padding: 6px 16px; min-height: 36px; font: inherit; font-weight: 600; cursor: pointer; }
-  .tb__entrar:hover { background: var(--terra-creme); color: var(--terra-castanho); }
+  .tb__entrar:hover { background: var(--terra-branco); color: var(--terra-castanho); }
   .tb__main { flex: 1; width: 100%; max-width: 880px; margin: 0 auto; padding: 64px 24px 56px; box-sizing: border-box; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; gap: 22px; }
   .tb__logo { width: min(520px, 50%); height: auto; display: block; }
-  .tb__titulo { font-family: "Bowlby One SC", Impact, sans-serif; font-weight: 400; font-size: 34px; line-height: 1; margin: 12px 0 0; letter-spacing: .01em; }
+  .tb__titulo { font-family: "Zalando Sans SemiExpanded", "Gantari", sans-serif; font-weight: 800; font-size: 34px; line-height: 1; margin: 12px 0 0; letter-spacing: .01em; }
   .tb__sub { margin: -8px 0 0; font-size: 15px; opacity: .75; }
   .tb__footer { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px 28px; padding: 24px; font-size: 14px; border-top: 1px solid rgba(72,25,28,.2); }
   .tb__footer a { color: var(--terra-castanho); }

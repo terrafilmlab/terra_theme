@@ -11,6 +11,7 @@
 <section class="t-section t-bg-areia" style="padding-top: 24px;">
   <div class="t-wrap t-order">
     <div class="t-stack" style="flex: 1 1 440px; gap: 24px;">
+      <img class="t-ilu" src="{{ 'terra-ilu-61-castanho.webp' | asset_url }}" alt="" width="640" height="542" style="width: 140px; height: auto;">
       <h1 class="t-display" style="font-size: clamp(40px, 5vw, 68px);">{{ product.title }}</h1>
       <div class="t-lead t-rte">{{ product.description }}</div>
       <div class="t-stack" style="gap: 16px;">
@@ -21,7 +22,7 @@
       {%- if s.nota != blank -%}<div class="t-info t-rte" style="flex: none; padding: 18px 20px; font-size: 15px;">{{ s.nota }}</div>{%- endif -%}
     </div>
 
-    <form class="t-stack" id="terra-neg-{{ sid }}" style="flex: 1 1 460px; background: var(--terra-creme); border-radius: 8px; padding: 32px; gap: 22px;" novalidate>
+    <form class="t-stack" id="terra-neg-{{ sid }}" style="flex: 1 1 460px; background: var(--terra-branco); border-radius: 8px; padding: 32px; gap: 22px;" novalidate>
       <div style="display: flex; justify-content: space-between; align-items: baseline; gap: 16px;">
         <h2 class="t-display" style="font-size: 28px;">Devolução por DPD</h2>
         <span style="color: var(--terra-azul); font-weight: 700; font-size: 22px;">{{ v.price | money }}</span>

@@ -2,6 +2,7 @@
 <section class="t-section t-bg-azul" style="padding-block: 64px;">
   <div class="t-wrap t-news">
     <div class="t-stack" style="gap: 8px; flex: 1 1 360px;">
+      {%- if s.ilu != blank and s.ilu != 'nenhuma' -%}<img class="t-ilu" src="{{ s.ilu | asset_url }}" alt="" loading="lazy" width="640" height="640" style="width: 110px; height: auto;">{%- endif -%}
       <h2 class="t-display" style="font-size: 34px;">{{ s.titulo }}</h2>
       {%- if s.texto != blank -%}<p style="margin: 0;">{{ s.texto }}</p>{%- endif -%}
     </div>
@@ -24,9 +25,83 @@
   "name": "Terra · Newsletter",
   "tag": "div",
   "settings": [
-    { "type": "text", "id": "titulo", "label": "Título", "default": "Novidades do lab" },
-    { "type": "text", "id": "texto", "label": "Texto", "default": "Película nova, workshops e prazos. Uma vez por mês, no máximo." }
+    {
+      "type": "text",
+      "id": "titulo",
+      "label": "Título",
+      "default": "Novidades do <em>lab</em>"
+    },
+    {
+      "type": "text",
+      "id": "texto",
+      "label": "Texto",
+      "default": "Película nova, workshops e prazos. Uma vez por mês, no máximo."
+    },
+    {
+      "type": "select",
+      "id": "ilu",
+      "label": "Ilustração",
+      "default": "terra-ilu-01-cru.webp",
+      "options": [
+        {
+          "value": "nenhuma",
+          "label": "Nenhuma"
+        },
+        {
+          "value": "terra-ilu-04-castanho.webp",
+          "label": "Mão a entregar (castanho)"
+        },
+        {
+          "value": "terra-ilu-03-castanho.webp",
+          "label": "Caixa aberta (castanho)"
+        },
+        {
+          "value": "terra-ilu-37-castanho.webp",
+          "label": "Frasco do lab (castanho)"
+        },
+        {
+          "value": "terra-ilu-56-castanho.webp",
+          "label": "Scanner (castanho)"
+        },
+        {
+          "value": "terra-ilu-34-castanho.webp",
+          "label": "Pasta com foto (castanho)"
+        },
+        {
+          "value": "terra-ilu-61-castanho.webp",
+          "label": "Pasta cheia (castanho)"
+        },
+        {
+          "value": "terra-ilu-31-castanho.webp",
+          "label": "Caixa de película (castanho)"
+        },
+        {
+          "value": "terra-ilu-66-castanho.webp",
+          "label": "Rolo com braços (castanho)"
+        },
+        {
+          "value": "terra-ilu-01-cru.webp",
+          "label": "High five (claro)"
+        },
+        {
+          "value": "terra-ilu-40-cru.webp",
+          "label": "Estrela (claro)"
+        },
+        {
+          "value": "terra-ilu-49-cru.webp",
+          "label": "Mãos com câmara (claro)"
+        },
+        {
+          "value": "terra-ilu-70-cru.webp",
+          "label": "Sorrisos (claro)"
+        }
+      ]
+    }
   ],
-  "presets": [{ "name": "Terra · Newsletter" }]
+  "presets": [
+    {
+      "name": "Terra · Newsletter"
+    }
+  ]
 }
 {% endschema %}
