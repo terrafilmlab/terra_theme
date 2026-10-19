@@ -1,4 +1,100 @@
 {
+  "terra": {
+    "common": {
+      "free": "Grátis",
+      "email_ph": "o.teu@email.pt",
+      "email": "Email"
+    },
+    "order": {
+      "per_roll": "por rolo",
+      "extras": "Extras",
+      "roll": "rolo",
+      "how_many": "Quantos rolos?",
+      "one_less": "Menos um rolo",
+      "one_more": "Mais um rolo",
+      "arrival": "Como chegam os rolos ao lab?",
+      "arrival_lab": "Entrego no lab",
+      "arrival_dpd": "Envio pela DPD",
+      "arrival_dpd_sub": "Etiqueta e folha de envio por email. Grátis a partir de {{ n }} rolos.",
+      "negatives": "E os negativos?",
+      "neg_keep": "Guardar no lab",
+      "neg_keep_sub": "Ficam connosco {{ n }} meses. Pedes quando quiseres.",
+      "neg_pickup": "Levantar no lab",
+      "neg_pickup_sub": "Avisamos por email quando estiverem prontos.",
+      "neg_dpd": "Devolver pela DPD",
+      "neg_dpd_sub": "Seguem pela DPD depois do scan.",
+      "total": "Total estimado",
+      "add": "Adicionar ao carrinho",
+      "note": "Pagamento no momento da encomenda. Os portes de ida e de devolução aparecem como linhas próprias no carrinho.",
+      "nojs": "Para encomendar precisas de ter o JavaScript ativo no navegador.",
+      "dpd_on_us": "O envio para o lab é por nossa conta.",
+      "dpd_missing_one": "Falta 1 rolo para o envio ser grátis.",
+      "dpd_missing_many": "Faltam [n] rolos para o envio ser grátis.",
+      "unavailable": "Combinação indisponível",
+      "sold_out": "Esgotado",
+      "error": "Não foi possível adicionar ao carrinho:",
+      "prop_arrival": "Chegada dos rolos",
+      "prop_negatives": "Negativos",
+      "prop_for": "Para"
+    },
+    "neg": {
+      "step1": "Escolhes o que queres receber.",
+      "step2": "Pagas os portes DPD e confirmas a morada no checkout.",
+      "step3": "Juntamos os envelopes e enviamos. Recebes o código de seguimento por email.",
+      "title": "Devolução por DPD",
+      "what": "O que queres receber?",
+      "all": "Todos os negativos guardados",
+      "all_sub": "Tudo o que tens no lab, num só envio.",
+      "some": "Encomendas específicas",
+      "some_sub": "Indicas os números das encomendas.",
+      "numbers": "Números das encomendas",
+      "numbers_ph": "Ex.: #1042, #1057",
+      "numbers_help": "Estão no email de confirmação de cada encomenda.",
+      "email": "Email usado nas encomendas",
+      "submit": "Pedir devolução",
+      "note": "Os negativos ficam guardados {{ n }} meses a contar da data em que os scans são enviados.",
+      "err_mail": "Indica o email que usaste nas encomendas.",
+      "err_order": "Indica pelo menos um número de encomenda.",
+      "err_fail": "Não foi possível continuar:",
+      "prop_request": "Pedido",
+      "prop_email": "Email das encomendas",
+      "prop_orders": "Encomendas"
+    },
+    "label": {
+      "name": "Nome",
+      "rolls": "Rolos",
+      "process": "Processo",
+      "scan": "Scan",
+      "negatives": "Negativos"
+    },
+    "prices": {
+      "aria": "Preços de revelação"
+    },
+    "products": {
+      "own_brand": "Marca própria",
+      "new": "Novo",
+      "sale": "Promoção",
+      "from": "desde",
+      "pick": "Escolhe uma coleção"
+    },
+    "news": {
+      "thanks": "Obrigado! Ficas a par das novidades."
+    },
+    "visit": {
+      "map": "Abrir no mapa"
+    },
+    "footer": {
+      "complaints": "Livro de Reclamações"
+    },
+    "soon": {
+      "enter": "Entrar"
+    },
+    "header": {
+      "quick": "Atalhos",
+      "how": "Como funciona",
+      "contact": "Contactos"
+    }
+  },
   "blocks": {
     "load_video": "Carregar vídeo: {{ description }}",
     "sold_out": "Esgotado",

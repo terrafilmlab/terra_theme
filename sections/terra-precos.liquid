@@ -12,7 +12,7 @@
         <p style="margin: 0; flex: 1 1 320px;">{{ s.prazo_texto }}</p>
       </div>
     {%- endif -%}
-    <div class="t-prices" role="table" aria-label="Preços de revelação">
+    <div class="t-prices" role="table" aria-label="{{ 'terra.prices.aria' | t }}">
       <div class="t-prices__row t-prices__head" role="row"><span role="columnheader">{{ s.col1 }}</span><span role="columnheader">{{ s.col2 }}</span><span role="columnheader">{{ s.col3 }}</span></div>
       {%- for block in section.blocks -%}
         {%- assign b = block.settings -%}

@@ -17,11 +17,11 @@
           <span class="t-display" style="font-size: 30px;">{{ s.numero }}</span>
         </div>
         <div class="t-label-card__grid">
-          <span>Nome</span><strong>{{ s.l_nome }}</strong>
-          <span>Rolos</span><strong>{{ s.l_rolos }}</strong>
-          <span>Processo</span><strong>{{ s.l_processo }}</strong>
-          <span>Scan</span><strong>{{ s.l_scan }}</strong>
-          <span>Negativos</span><strong>{{ s.l_negativos }}</strong>
+          <span>{{ 'terra.label.name' | t }}</span><strong>{{ s.l_nome }}</strong>
+          <span>{{ 'terra.label.rolls' | t }}</span><strong>{{ s.l_rolos }}</strong>
+          <span>{{ 'terra.label.process' | t }}</span><strong>{{ s.l_processo }}</strong>
+          <span>{{ 'terra.label.scan' | t }}</span><strong>{{ s.l_scan }}</strong>
+          <span>{{ 'terra.label.negatives' | t }}</span><strong>{{ s.l_negativos }}</strong>
           <img class="t-label-card__ilu" src="{{ 'terra-ilu-04-castanho.webp' | asset_url }}" alt="" width="640" height="834" loading="eager">
         </div>
         <div class="t-label-card__barcode" aria-hidden="true"></div>

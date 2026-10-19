@@ -20,9 +20,9 @@
     assign path = '/'
   endif
 -%}
-<nav class="t-toplinks mobile:hidden" aria-label="{% if en %}Quick links{% else %}Atalhos{% endif %}">
-  <a href="{{ home }}/#como">{% if en %}How it works{% else %}Como funciona{% endif %}</a>
-  <a href="{{ home }}/#lab">{% if en %}Contact{% else %}Contactos{% endif %}</a>
+<nav class="t-toplinks mobile:hidden" aria-label="{{ 'terra.header.quick' | t }}">
+  <a href="{{ home }}/#como">{{ 'terra.header.how' | t }}</a>
+  <a href="{{ home }}/#lab">{{ 'terra.header.contact' | t }}</a>
   {%- if localization.available_languages.size > 1 -%}
     <span class="t-lang">
       {%- for l in localization.available_languages -%}

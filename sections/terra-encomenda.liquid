@@ -45,7 +45,7 @@
         <div class="t-stack" style="gap: 10px;">
           <h1 class="t-display" style="font-size: clamp(40px, 5vw, 64px);">{{ product.title }}</h1>
           {%- if product.description != blank -%}<div class="t-rte">{{ product.description }}</div>{%- endif -%}
-          <span style="color: var(--terra-azul); font-weight: 700; font-size: 22px;" data-preco-unit>{{ v0.price | money }} por rolo</span>
+          <span style="color: var(--terra-azul); font-weight: 700; font-size: 22px;" data-preco-unit>{{ v0.price | money }} {{ 'terra.order.per_roll' | t }}</span>
         </div>
 
         {%- unless product.has_only_default_variant -%}
@@ -66,14 +66,14 @@
         {%- for block in section.blocks -%}{%- if block.type == 'extra' and block.settings.produto != blank -%}{%- assign tem_extras = true -%}{%- endif -%}{%- endfor -%}
         {%- if tem_extras -%}
           <fieldset class="t-field">
-            <legend>Extras</legend>
+            <legend>{{ 'terra.order.extras' | t }}</legend>
             {%- for block in section.blocks -%}
               {%- if block.type == 'extra' and block.settings.produto != blank -%}
                 {%- assign ev = block.settings.produto.selected_or_first_available_variant -%}
                 <label class="t-check" {{ block.shopify_attributes }}>
                   <input type="checkbox" data-extra="{{ ev.id }}" data-preco="{{ ev.price }}">
                   <span>{{ block.settings.rotulo | default: block.settings.produto.title }}</span>
-                  <span style="font-weight: 600;">+ {{ ev.price | money }} / rolo</span>
+                  <span style="font-weight: 600;">+ {{ ev.price | money }} / {{ 'terra.order.roll' | t }}</span>
                 </label>
               {%- endif -%}
             {%- endfor -%}
@@ -81,24 +81,24 @@
         {%- endif -%}
 
         <div class="t-field">
-          <span class="t-label" id="rolos-label-{{ sid }}">Quantos rolos?</span>
+          <span class="t-label" id="rolos-label-{{ sid }}">{{ 'terra.order.how_many' | t }}</span>
           <div class="t-stepper" role="group" aria-labelledby="rolos-label-{{ sid }}">
-            <button type="button" data-rolos="-1" aria-label="Menos um rolo">−</button>
+            <button type="button" data-rolos="-1" aria-label="{{ 'terra.order.one_less' | t }}">−</button>
             <output data-rolos-out aria-live="polite">1</output>
-            <button type="button" data-rolos="1" aria-label="Mais um rolo">+</button>
+            <button type="button" data-rolos="1" aria-label="{{ 'terra.order.one_more' | t }}">+</button>
           </div>
         </div>
 
         <fieldset class="t-field">
-          <legend>Como chegam os rolos ao lab?</legend>
+          <legend>{{ 'terra.order.arrival' | t }}</legend>
           <button type="button" class="t-choice" data-chegada="lab" aria-pressed="false">
-            <span class="t-choice__top"><span>Entrego no lab</span><span>Grátis</span></span>
+            <span class="t-choice__top"><span>{{ 'terra.order.arrival_lab' | t }}</span><span>{{ 'terra.common.free' | t }}</span></span>
             <span class="t-choice__sub">{{ s.morada_balcao }}</span>
           </button>
           {%- if envio -%}
             <button type="button" class="t-choice" data-chegada="dpd" aria-pressed="true">
-              <span class="t-choice__top"><span>Envio pela DPD</span><span data-envio-preco>{{ envio.price | money }}</span></span>
-              <span class="t-choice__sub">Etiqueta e folha de envio por email. Grátis a partir de {{ s.limiar }} rolos.</span>
+              <span class="t-choice__top"><span>{{ 'terra.order.arrival_dpd' | t }}</span><span data-envio-preco>{{ envio.price | money }}</span></span>
+              <span class="t-choice__sub">{{ 'terra.order.arrival_dpd_sub' | t: n: s.limiar }}</span>
             </button>
             <div class="t-progress" data-progress>
               <span data-progress-msg></span>
@@ -108,28 +108,28 @@
         </fieldset>
 
         <fieldset class="t-field">
-          <legend>E os negativos?</legend>
+          <legend>{{ 'terra.order.negatives' | t }}</legend>
           <button type="button" class="t-choice" data-neg="guardar" aria-pressed="true">
-            <span class="t-choice__top"><span>Guardar no lab</span><span>Grátis</span></span>
-            <span class="t-choice__sub">Ficam connosco {{ s.meses_arquivo }} meses. Pedes quando quiseres.</span>
+            <span class="t-choice__top"><span>{{ 'terra.order.neg_keep' | t }}</span><span>{{ 'terra.common.free' | t }}</span></span>
+            <span class="t-choice__sub">{{ 'terra.order.neg_keep_sub' | t: n: s.meses_arquivo }}</span>
           </button>
           <button type="button" class="t-choice" data-neg="levantar" aria-pressed="false">
-            <span class="t-choice__top"><span>Levantar no lab</span><span>Grátis</span></span>
-            <span class="t-choice__sub">Avisamos por email quando estiverem prontos.</span>
+            <span class="t-choice__top"><span>{{ 'terra.order.neg_pickup' | t }}</span><span>{{ 'terra.common.free' | t }}</span></span>
+            <span class="t-choice__sub">{{ 'terra.order.neg_pickup_sub' | t }}</span>
           </button>
           {%- if devolucao -%}
             <button type="button" class="t-choice" data-neg="dpd" aria-pressed="false">
-              <span class="t-choice__top"><span>Devolver pela DPD</span><span>{{ devolucao.price | money }}</span></span>
-              <span class="t-choice__sub">Seguem pela DPD depois do scan.</span>
+              <span class="t-choice__top"><span>{{ 'terra.order.neg_dpd' | t }}</span><span>{{ devolucao.price | money }}</span></span>
+              <span class="t-choice__sub">{{ 'terra.order.neg_dpd_sub' | t }}</span>
             </button>
           {%- endif -%}
         </fieldset>
 
-        <div class="t-total"><span>Total estimado</span><span data-total>{{ v0.price | money }}</span></div>
-        <button type="submit" class="t-btn t-btn--full" data-submit>Adicionar ao carrinho</button>
+        <div class="t-total"><span>{{ 'terra.order.total' | t }}</span><span data-total>{{ v0.price | money }}</span></div>
+        <button type="submit" class="t-btn t-btn--full" data-submit>{{ 'terra.order.add' | t }}</button>
         <p class="t-error" data-erro hidden></p>
-        <p class="t-small">Pagamento no momento da encomenda. Os portes de ida e de devolução aparecem como linhas próprias no carrinho.</p>
-        <noscript><p class="t-error">Para encomendar precisas de ter o JavaScript ativo no navegador.</p></noscript>
+        <p class="t-small">{{ 'terra.order.note' | t }}</p>
+        <noscript><p class="t-error">{{ 'terra.order.nojs' | t }}</p></noscript>
       </form>
     </div>
 
@@ -159,7 +159,27 @@
     "currency": {{ cart.currency.iso_code | json }},
     "cartUrl": {{ routes.cart_url | json }},
     "cartJs": {{ routes.cart_url | append: '.js' | json }},
-    "addUrl": {{ routes.cart_add_url | append: '.js' | json }}
+    "addUrl": {{ routes.cart_add_url | append: '.js' | json }},
+    "locale": {{ request.locale.iso_code | json }},
+    "t": {
+      "perRoll": {{ 'terra.order.per_roll' | t | json }},
+      "free": {{ 'terra.common.free' | t | json }},
+      "onUs": {{ 'terra.order.dpd_on_us' | t | json }},
+      "missing1": {{ 'terra.order.dpd_missing_one' | t | json }},
+      "missingN": {{ 'terra.order.dpd_missing_many' | t | json }},
+      "add": {{ 'terra.order.add' | t | json }},
+      "unavailable": {{ 'terra.order.unavailable' | t | json }},
+      "soldOut": {{ 'terra.order.sold_out' | t | json }},
+      "error": {{ 'terra.order.error' | t | json }},
+      "pArrival": {{ 'terra.order.prop_arrival' | t | json }},
+      "pNeg": {{ 'terra.order.prop_negatives' | t | json }},
+      "pFor": {{ 'terra.order.prop_for' | t | json }},
+      "arrLab": {{ 'terra.order.arrival_lab' | t | json }},
+      "arrDpd": {{ 'terra.order.arrival_dpd' | t | json }},
+      "negKeep": {{ 'terra.order.neg_keep' | t | json }},
+      "negPickup": {{ 'terra.order.neg_pickup' | t | json }},
+      "negDpd": {{ 'terra.order.neg_dpd' | t | json }}
+    }
   }
 </script>
 <script>
@@ -167,7 +187,7 @@
     var form = document.getElementById('terra-order-{{ sid }}');
     if (!form) return;
     var data = JSON.parse(document.getElementById('terra-order-data-{{ sid }}').textContent);
-    var fmt = new Intl.NumberFormat('pt-PT', { style: 'currency', currency: data.currency });
+    var fmt = new Intl.NumberFormat(data.locale || 'pt-PT', { style: 'currency', currency: data.currency });
     var money = function (c) { return fmt.format(c / 100); };
     var $ = function (sel) { return form.querySelector(sel); };
     var $$ = function (sel) { return Array.prototype.slice.call(form.querySelectorAll(sel)); };
@@ -202,16 +222,16 @@
         var falta = Math.max(0, data.limiar - state.rolos);
         prog.classList.toggle('t-progress--ok', gratis);
         $('[data-progress-msg]').textContent = gratis
-          ? 'O envio para o lab é por nossa conta.'
-          : 'Falta' + (falta > 1 ? 'm ' : ' ') + falta + (falta > 1 ? ' rolos' : ' rolo') + ' para o envio ser grátis.';
+          ? data.t.onUs
+          : (falta > 1 ? data.t.missingN.replace('[n]', falta) : data.t.missing1);
         $('[data-progress-bar]').style.width = Math.min(100, Math.round(state.rolos / data.limiar * 100)) + '%';
-        $('[data-envio-preco]').textContent = gratis ? 'Grátis' : money(data.envio.price);
+        $('[data-envio-preco]').textContent = gratis ? data.t.free : money(data.envio.price);
       }
 
       var total = 0;
       if (v) {
         total += v.price * state.rolos;
-        $('[data-preco-unit]').textContent = money(v.price) + ' por rolo';
+        $('[data-preco-unit]').textContent = money(v.price) + ' ' + data.t.perRoll;
       }
       $$('[data-extra]').forEach(function (c) { if (c.checked) total += (+c.dataset.preco) * state.rolos; });
       if (state.chegada === 'dpd' && data.envio && !gratis) total += data.envio.price;
@@ -220,7 +240,7 @@
 
       var sub = $('[data-submit]');
       sub.disabled = !v || !v.available;
-      sub.textContent = !v ? 'Combinação indisponível' : (!v.available ? 'Esgotado' : 'Adicionar ao carrinho');
+      sub.textContent = !v ? data.t.unavailable : (!v.available ? data.t.soldOut : data.t.add);
     }
 
     form.addEventListener('click', function (e) {
@@ -236,8 +256,8 @@
     form.addEventListener('change', render);
 
     var labels = {
-      chegada: { lab: 'Entrego no lab', dpd: 'Envio pela DPD' },
-      neg: { guardar: 'Guardar no lab', levantar: 'Levantar no lab', dpd: 'Devolver pela DPD' }
+      chegada: { lab: data.t.arrLab, dpd: data.t.arrDpd },
+      neg: { guardar: data.t.negKeep, levantar: data.t.negPickup, dpd: data.t.negDpd }
     };
 
     form.addEventListener('submit', function (e) {
@@ -250,9 +270,9 @@
         .then(function (r) { return r.json(); })
         .then(function (cart) {
           var noCarrinho = function (id) { return cart.items.some(function (it) { return it.variant_id === id; }); };
-          var items = [{ id: v.id, quantity: state.rolos, properties: { 'Chegada dos rolos': labels.chegada[state.chegada], 'Negativos': labels.neg[state.neg] } }];
+          var items = [{ id: v.id, quantity: state.rolos, properties: (function () { var p = {}; p[data.t.pArrival] = labels.chegada[state.chegada]; p[data.t.pNeg] = labels.neg[state.neg]; return p; })() }];
           $$('[data-extra]').forEach(function (c) {
-            if (c.checked) items.push({ id: +c.dataset.extra, quantity: state.rolos, properties: { 'Para': v.name || '' } });
+            if (c.checked) items.push({ id: +c.dataset.extra, quantity: state.rolos, properties: (function () { var p = {}; p[data.t.pFor] = v.name || ''; return p; })() });
           });
           if (state.chegada === 'dpd' && data.envio && !noCarrinho(data.envio.id)) items.push({ id: data.envio.id, quantity: 1 });
           if (state.neg === 'dpd' && data.devolucao && !noCarrinho(data.devolucao.id)) items.push({ id: data.devolucao.id, quantity: 1 });
@@ -267,7 +287,7 @@
           window.location.href = data.cartUrl;
         })
         .catch(function (err) {
-          erro.textContent = 'Não foi possível adicionar ao carrinho: ' + err.message;
+          erro.textContent = data.t.error + ' ' + err.message;
           erro.hidden = false;
           sub.disabled = false;
         });

@@ -9,10 +9,10 @@
     {%- form 'customer', id: 'terra-newsletter' -%}
       <input type="hidden" name="contact[tags]" value="newsletter">
       {%- if form.posted_successfully? -%}
-        <p style="margin: 0; font-weight: 600;">Obrigado! Ficas a par das novidades.</p>
+        <p style="margin: 0; font-weight: 600;">{{ 'terra.news.thanks' | t }}</p>
       {%- else -%}
-        <label for="terra-nl-email" class="t-visually-hidden">Email</label>
-        <input id="terra-nl-email" type="email" name="contact[email]" required autocomplete="email" placeholder="o.teu@email.pt">
+        <label for="terra-nl-email" class="t-visually-hidden">{{ 'terra.common.email' | t }}</label>
+        <input id="terra-nl-email" type="email" name="contact[email]" required autocomplete="email" placeholder="{{ 'terra.common.email_ph' | t }}">
         <button type="submit">{{ s.botao | default: 'Quero receber' }}</button>
         {%- if form.errors -%}<p class="t-error" style="color: var(--terra-creme); flex-basis: 100%;">{{ form.errors | default_errors }}</p>{%- endif -%}
       {%- endif -%}

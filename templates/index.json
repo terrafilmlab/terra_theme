@@ -13,7 +13,17 @@
       "type": "terra-hero",
       "settings": {
         "link1": "shopify://collections/revelacao-scan",
-        "link2": "#precos"
+        "link2": "#precos",
+        "titulo": "Revelamos filme no <em>Bonfim</em>.",
+        "texto": "<p>C-41, preto e branco, E-6 e ECN-2. Deixas os rolos <strong>no balcão, na Rua Duque de Saldanha</strong>, ou mandas <strong>pela DPD de qualquer ponto do país</strong>. Os scans chegam-te por email.</p>",
+        "botao1": "Revelar os meus rolos",
+        "botao2": "Preços",
+        "numero": "Nº 0001",
+        "l_nome": "Terra Film Lab",
+        "l_rolos": "3",
+        "l_processo": "C-41 · 35 mm",
+        "l_scan": "Standard",
+        "l_negativos": "Guardar no lab"
       }
     },
     "fita": {
@@ -116,7 +126,17 @@
         "p3",
         "p4"
       ],
-      "settings": {}
+      "settings": {
+        "titulo": "Preços",
+        "nota": "Preço por rolo, com IVA.",
+        "prazo_num": "24",
+        "prazo_unidade": "horas",
+        "prazo_texto": "É quanto está a demorar esta semana, desde que os rolos chegam ao lab até receberes os scans.",
+        "col1": "Processo",
+        "col2": "Só revelação",
+        "col3": "+ scan",
+        "extras": "<p>Push ou pull: mais 2 € por rolo.</p><p>Envio para o lab via DPD: 5 €, grátis a partir do 3.º rolo.</p><p>Devolução dos negativos via DPD: 5 €.</p>"
+      }
     },
     "como": {
       "type": "terra-chegada",
@@ -142,7 +162,11 @@
         "c1",
         "c2"
       ],
-      "settings": {}
+      "settings": {
+        "titulo": "Como chegam os teus rolos <em>até nós</em>",
+        "depois_titulo": "E depois?",
+        "depois_texto": "<p>Cada envelope leva uma etiqueta com o número da tua encomenda e cada rolo leva o seu par, para nada se perder pelo caminho. Revelamos, digitalizamos e mandamos-te um email com uma galeria privada, que fica aberta 3 dias.</p><p>Os negativos ficam cá guardados 3 meses. Podes vir buscá-los ou <a href=\"/products/devolucao-negativos-dpd\">pedir que os enviemos</a>, de uma vez com os de várias encomendas.</p>"
+      }
     },
     "scan10k": {
       "type": "terra-scan10k",
@@ -174,7 +198,10 @@
         "s2",
         "s3"
       ],
-      "settings": {}
+      "settings": {
+        "titulo": "Scan <em>10K</em>",
+        "nota": "Preço a anunciar."
+      }
     },
     "pelicula": {
       "type": "terra-produtos",
@@ -216,7 +243,11 @@
         "a2",
         "a3"
       ],
-      "settings": {}
+      "settings": {
+        "titulo": "Um lab <em>de comunidade</em>",
+        "texto": "<p>A Terra não é só um sítio onde se deixam rolos. Queremos que seja um sítio onde se aparece, se tira dúvidas e se conhece quem também fotografa em filme.</p>",
+        "texto2": "<p>Estamos a preparar as primeiras coisas. Quem estiver na newsletter sabe primeiro.</p>"
+      }
     },
     "galeria": {
       "type": "terra-galeria",
@@ -252,7 +283,10 @@
         "g3",
         "g4"
       ],
-      "settings": {}
+      "settings": {
+        "titulo": "Fotos da comunidade",
+        "texto": "<p>Marca @terrafilmlab no Instagram.<br>Vamos adorar ver as tuas fotografias aqui</p>"
+      }
     },
     "faq": {
       "type": "terra-faq",
@@ -292,11 +326,20 @@
         "q3",
         "q4"
       ],
-      "settings": {}
+      "settings": {
+        "titulo": "FAQs"
+      }
     },
     "visita": {
       "type": "terra-visita",
-      "settings": {}
+      "settings": {
+        "titulo": "Passa <em>pelo lab</em>",
+        "morada": "<p>Rua Duque de Saldanha 345<br>4300-465 Porto, no Bonfim</p>",
+        "horario": "<p>Dias e horas de abertura</p>",
+        "aviso": "<p>Se fecharmos fora do normal, por férias ou feriados, avisamos aqui e na barra do topo.</p>",
+        "email_texto": "Dúvidas antes de mandar os rolos? Escreve para",
+        "email": "hello@terrafilmlab.com"
+      }
     },
     "newsletter": {
       "type": "terra-newsletter",

@@ -8,7 +8,7 @@
       {%- if s.horario != blank -%}<div class="t-rte">{{ s.horario }}</div>{%- endif -%}
       {%- if s.aviso != blank -%}<div class="t-rte" style="font-size: 15px;">{{ s.aviso }}</div>{%- endif -%}
       {%- if s.email != blank -%}<p style="margin: 0;">{{ s.email_texto }} <a href="mailto:{{ s.email }}">{{ s.email }}</a>.</p>{%- endif -%}
-      {%- if s.mapa != blank -%}<div><a class="t-link" href="{{ s.mapa }}" target="_blank" rel="noopener">Abrir no mapa</a></div>{%- endif -%}
+      {%- if s.mapa != blank -%}<div><a class="t-link" href="{{ s.mapa }}" target="_blank" rel="noopener">{{ 'terra.visit.map' | t }}</a></div>{%- endif -%}
     </div>
     <div class="t-photo t-visit__media">
       {%- if s.imagem != blank -%}

@@ -8,6 +8,102 @@
  * ------------------------------------------------------------
  */
 {
+  "terra": {
+    "common": {
+      "free": "Free",
+      "email_ph": "you@email.com",
+      "email": "Email"
+    },
+    "order": {
+      "per_roll": "per roll",
+      "extras": "Extras",
+      "roll": "roll",
+      "how_many": "How many rolls?",
+      "one_less": "One roll less",
+      "one_more": "One roll more",
+      "arrival": "How do your rolls get to the lab?",
+      "arrival_lab": "I’ll drop them off",
+      "arrival_dpd": "Send them by DPD",
+      "arrival_dpd_sub": "We email you the label and shipping slip. Free from {{ n }} rolls.",
+      "negatives": "And your negatives?",
+      "neg_keep": "Keep them at the lab",
+      "neg_keep_sub": "We hold on to them for {{ n }} months. Ask for them whenever you like.",
+      "neg_pickup": "Pick them up at the lab",
+      "neg_pickup_sub": "We’ll email you when they’re ready.",
+      "neg_dpd": "Send them back by DPD",
+      "neg_dpd_sub": "They go out by DPD once the scans are done.",
+      "total": "Estimated total",
+      "add": "Add to cart",
+      "note": "You pay when you order. Shipping to the lab and back shows up as separate lines in your cart.",
+      "nojs": "You need JavaScript turned on in your browser to order.",
+      "dpd_on_us": "Shipping to the lab is on us.",
+      "dpd_missing_one": "One more roll and shipping is free.",
+      "dpd_missing_many": "[n] more rolls and shipping is free.",
+      "unavailable": "Not available",
+      "sold_out": "Sold out",
+      "error": "Couldn’t add this to your cart:",
+      "prop_arrival": "Rolls arrive by",
+      "prop_negatives": "Negatives",
+      "prop_for": "For"
+    },
+    "neg": {
+      "step1": "Choose what you want back.",
+      "step2": "Pay the DPD shipping and confirm your address at checkout.",
+      "step3": "We gather your envelopes and ship them. You get the tracking code by email.",
+      "title": "Return by DPD",
+      "what": "What should we send back?",
+      "all": "All the negatives we’re holding",
+      "all_sub": "Everything you have at the lab, in one parcel.",
+      "some": "Specific orders",
+      "some_sub": "Tell us the order numbers.",
+      "numbers": "Order numbers",
+      "numbers_ph": "e.g. #1042, #1057",
+      "numbers_help": "You’ll find them in each order confirmation email.",
+      "email": "Email you ordered with",
+      "submit": "Request return",
+      "note": "We keep negatives for {{ n }} months from the day your scans are sent.",
+      "err_mail": "Please add the email you ordered with.",
+      "err_order": "Please add at least one order number.",
+      "err_fail": "Couldn’t continue:",
+      "prop_request": "Request",
+      "prop_email": "Order email",
+      "prop_orders": "Orders"
+    },
+    "label": {
+      "name": "Name",
+      "rolls": "Rolls",
+      "process": "Process",
+      "scan": "Scan",
+      "negatives": "Negatives"
+    },
+    "prices": {
+      "aria": "Developing prices"
+    },
+    "products": {
+      "own_brand": "Our own",
+      "new": "New",
+      "sale": "Sale",
+      "from": "from",
+      "pick": "Pick a collection"
+    },
+    "news": {
+      "thanks": "Thanks! You’re on the list."
+    },
+    "visit": {
+      "map": "Open in maps"
+    },
+    "footer": {
+      "complaints": "Complaints Book"
+    },
+    "soon": {
+      "enter": "Enter"
+    },
+    "header": {
+      "quick": "Quick links",
+      "how": "How it works",
+      "contact": "Contact"
+    }
+  },
   "accessibility": {
     "account": "Account",
     "active_filters": "Active filters:",

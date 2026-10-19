@@ -1,6 +1,14 @@
 {
   "sections": {
-    "pedido": { "type": "terra-pedido-negativos", "settings": { "meses_arquivo": 3 } }
+    "pedido": {
+      "type": "terra-pedido-negativos",
+      "settings": {
+        "meses_arquivo": 3,
+        "nota": "<p>Preferes vir buscar? Passa pelo lab na Rua Duque de Saldanha 345. Não precisas de fazer pedido.</p>"
+      }
+    }
   },
-  "order": ["pedido"]
+  "order": [
+    "pedido"
+  ]
 }

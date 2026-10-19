@@ -15,7 +15,7 @@
     </div>
     <div class="t-foot__legal">
       <span>{{ s.legal }}</span>
-      {%- if s.reclamacoes != blank -%}<a href="{{ s.reclamacoes }}" target="_blank" rel="noopener">Livro de Reclamações</a>{%- endif -%}
+      {%- if s.reclamacoes != blank -%}<a href="{{ s.reclamacoes }}" target="_blank" rel="noopener">{{ 'terra.footer.complaints' | t }}</a>{%- endif -%}
     </div>
   </div>
 </footer>

@@ -15,45 +15,45 @@
       <h1 class="t-display" style="font-size: clamp(40px, 5vw, 68px);">{{ product.title }}</h1>
       <div class="t-lead t-rte">{{ product.description }}</div>
       <div class="t-stack" style="gap: 16px;">
-        <div class="t-steps-num"><span class="t-display">01</span><span>Escolhes o que queres receber.</span></div>
-        <div class="t-steps-num"><span class="t-display">02</span><span>Pagas os portes DPD e confirmas a morada no checkout.</span></div>
-        <div class="t-steps-num"><span class="t-display">03</span><span>Juntamos os envelopes e enviamos. Recebes o código de seguimento por email.</span></div>
+        <div class="t-steps-num"><span class="t-display">01</span><span>{{ 'terra.neg.step1' | t }}</span></div>
+        <div class="t-steps-num"><span class="t-display">02</span><span>{{ 'terra.neg.step2' | t }}</span></div>
+        <div class="t-steps-num"><span class="t-display">03</span><span>{{ 'terra.neg.step3' | t }}</span></div>
       </div>
       {%- if s.nota != blank -%}<div class="t-info t-rte" style="flex: none; padding: 18px 20px; font-size: 15px;">{{ s.nota }}</div>{%- endif -%}
     </div>
 
     <form class="t-stack" id="terra-neg-{{ sid }}" style="flex: 1 1 460px; background: var(--terra-branco); border-radius: 8px; padding: 32px; gap: 22px;" novalidate>
       <div style="display: flex; justify-content: space-between; align-items: baseline; gap: 16px;">
-        <h2 class="t-display" style="font-size: 28px;">Devolução por DPD</h2>
+        <h2 class="t-display" style="font-size: 28px;">{{ 'terra.neg.title' | t }}</h2>
         <span style="color: var(--terra-azul); font-weight: 700; font-size: 22px;">{{ v.price | money }}</span>
       </div>
 
       <fieldset class="t-field">
-        <legend>O que queres receber?</legend>
+        <legend>{{ 'terra.neg.what' | t }}</legend>
         <button type="button" class="t-choice" data-tipo="todos" aria-pressed="true">
-          <span class="t-choice__top"><span>Todos os negativos guardados</span></span>
-          <span class="t-choice__sub">Tudo o que tens no lab, num só envio.</span>
+          <span class="t-choice__top"><span>{{ 'terra.neg.all' | t }}</span></span>
+          <span class="t-choice__sub">{{ 'terra.neg.all_sub' | t }}</span>
         </button>
         <button type="button" class="t-choice" data-tipo="esp" aria-pressed="false">
-          <span class="t-choice__top"><span>Encomendas específicas</span></span>
-          <span class="t-choice__sub">Indicas os números das encomendas.</span>
+          <span class="t-choice__top"><span>{{ 'terra.neg.some' | t }}</span></span>
+          <span class="t-choice__sub">{{ 'terra.neg.some_sub' | t }}</span>
         </button>
       </fieldset>
 
       <div class="t-field" data-esp hidden>
-        <label class="t-label" for="enc-{{ sid }}" style="margin: 0;">Números das encomendas</label>
-        <input class="t-input" id="enc-{{ sid }}" type="text" placeholder="Ex.: #1042, #1057">
-        <span class="t-small">Estão no email de confirmação de cada encomenda.</span>
+        <label class="t-label" for="enc-{{ sid }}" style="margin: 0;">{{ 'terra.neg.numbers' | t }}</label>
+        <input class="t-input" id="enc-{{ sid }}" type="text" placeholder="{{ 'terra.neg.numbers_ph' | t }}">
+        <span class="t-small">{{ 'terra.neg.numbers_help' | t }}</span>
       </div>
 
       <div class="t-field">
-        <label class="t-label" for="mail-{{ sid }}" style="margin: 0;">Email usado nas encomendas</label>
-        <input class="t-input" id="mail-{{ sid }}" type="email" autocomplete="email" placeholder="o.teu@email.pt" {% if customer %}value="{{ customer.email }}"{% endif %}>
+        <label class="t-label" for="mail-{{ sid }}" style="margin: 0;">{{ 'terra.neg.email' | t }}</label>
+        <input class="t-input" id="mail-{{ sid }}" type="email" autocomplete="email" placeholder="{{ 'terra.common.email_ph' | t }}" {% if customer %}value="{{ customer.email }}"{% endif %}>
       </div>
 
-      <button type="submit" class="t-btn t-btn--full" {% unless v.available %}disabled{% endunless %}>Pedir devolução</button>
+      <button type="submit" class="t-btn t-btn--full" {% unless v.available %}disabled{% endunless %}>{{ 'terra.neg.submit' | t }}</button>
       <p class="t-error" data-erro hidden></p>
-      <p class="t-small">Os negativos ficam guardados {{ s.meses_arquivo }} meses a contar da data em que os scans são enviados.</p>
+      <p class="t-small">{{ 'terra.neg.note' | t: n: s.meses_arquivo }}</p>
     </form>
   </div>
 </section>
@@ -63,6 +63,16 @@
     var form = document.getElementById('terra-neg-{{ sid }}');
     if (!form) return;
     var tipo = 'todos';
+    var T = {
+      noMail: {{ 'terra.neg.err_mail' | t | json }},
+      noOrder: {{ 'terra.neg.err_order' | t | json }},
+      fail: {{ 'terra.neg.err_fail' | t | json }},
+      pReq: {{ 'terra.neg.prop_request' | t | json }},
+      pMail: {{ 'terra.neg.prop_email' | t | json }},
+      pOrders: {{ 'terra.neg.prop_orders' | t | json }},
+      all: {{ 'terra.neg.all' | t | json }},
+      some: {{ 'terra.neg.some' | t | json }}
+    };
     var esp = form.querySelector('[data-esp]');
     var erro = form.querySelector('[data-erro]');
     form.addEventListener('click', function (e) {
@@ -77,10 +87,10 @@
       var enc = document.getElementById('enc-{{ sid }}').value.trim();
       var mail = document.getElementById('mail-{{ sid }}').value.trim();
       erro.hidden = true;
-      if (!mail || mail.indexOf('@') < 1) { erro.textContent = 'Indica o email que usaste nas encomendas.'; erro.hidden = false; return; }
-      if (tipo === 'esp' && !enc) { erro.textContent = 'Indica pelo menos um número de encomenda.'; erro.hidden = false; return; }
-      var props = { 'Pedido': tipo === 'todos' ? 'Todos os negativos guardados' : 'Encomendas específicas', 'Email das encomendas': mail };
-      if (tipo === 'esp') props['Encomendas'] = enc;
+      if (!mail || mail.indexOf('@') < 1) { erro.textContent = T.noMail; erro.hidden = false; return; }
+      if (tipo === 'esp' && !enc) { erro.textContent = T.noOrder; erro.hidden = false; return; }
+      var props = {}; props[T.pReq] = tipo === 'todos' ? T.all : T.some; props[T.pMail] = mail;
+      if (tipo === 'esp') props[T.pOrders] = enc;
       fetch({{ routes.cart_add_url | append: '.js' | json }}, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
@@ -90,7 +100,7 @@
           if (!r.ok) return r.json().then(function (j) { throw new Error(j.description || 'Erro'); });
           window.location.href = '/checkout';
         })
-        .catch(function (err) { erro.textContent = 'Não foi possível continuar: ' + err.message; erro.hidden = false; });
+        .catch(function (err) { erro.textContent = T.fail + ' ' + err.message; erro.hidden = false; });
     });
   })();
 </script>
