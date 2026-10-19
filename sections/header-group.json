@@ -79,7 +79,7 @@
       "settings": {
         "logo_position": "left",
         "menu_position": "left",
-        "menu_row": "top",
+        "menu_row": "bottom",
         "show_search": true,
         "search_position": "right",
         "search_row": "top",
@@ -108,28 +108,28 @@
           "type": "prazo",
           "settings": {
             "processo": "C-41",
-            "prazo": "X dias úteis"
+            "prazo": "[X] dias úteis"
           }
         },
         "pb": {
           "type": "prazo",
           "settings": {
             "processo": "P&B",
-            "prazo": "X dias úteis"
+            "prazo": "[X] dias úteis"
           }
         },
         "e6": {
           "type": "prazo",
           "settings": {
             "processo": "E-6",
-            "prazo": "X dias úteis"
+            "prazo": "[X] dias úteis"
           }
         },
         "ecn2": {
           "type": "prazo",
           "settings": {
             "processo": "ECN-2",
-            "prazo": "X dias úteis"
+            "prazo": "[X] dias úteis"
           }
         }
       },
@@ -140,8 +140,8 @@
         "ecn2"
       ],
       "settings": {
-        "titulo": "Prazos atuais",
-        "nota": "Envio DPD grátis a partir de 3 rolos"
+        "titulo": "Prazos desta semana",
+        "nota": "A partir de 3 rolos, o envio para o lab é por nossa conta"
       }
     }
   },

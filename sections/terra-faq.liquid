@@ -1,0 +1,33 @@
+{%- comment -%} Terra · Perguntas frequentes. {%- endcomment -%}
+{%- assign s = section.settings -%}
+<section class="t-section t-bg-areia" id="faq">
+  <div class="t-wrap t-row" style="max-width: 1180px; gap: 40px 72px; align-items: flex-start;">
+    <div class="t-stack" style="flex: 1 1 300px; gap: 16px;">
+      <h2 class="t-display t-h2">{{ s.titulo }}</h2>
+      <img class="t-ilu" src="{{ 'terra-ilu-66-castanho.webp' | asset_url }}" alt="" loading="lazy" width="640" height="640" style="width: 120px; height: auto;">
+    </div>
+    <div class="t-faq" style="flex: 2 1 520px;">
+      {%- for block in section.blocks -%}
+        <details {% if forloop.first %}open{% endif %} {{ block.shopify_attributes }}>
+          <summary>{{ block.settings.pergunta }}</summary>
+          <div class="t-rte">{{ block.settings.resposta }}</div>
+        </details>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Terra · Perguntas",
+  "tag": "div",
+  "settings": [ { "type": "text", "id": "titulo", "label": "Título", "default": "FAQs" } ],
+  "blocks": [
+    { "type": "pergunta", "name": "Pergunta", "settings": [
+      { "type": "text", "id": "pergunta", "label": "Pergunta", "default": "Pergunta" },
+      { "type": "richtext", "id": "resposta", "label": "Resposta", "default": "<p>Resposta</p>" }
+    ] }
+  ],
+  "presets": [{ "name": "Terra · Perguntas" }]
+}
+{% endschema %}

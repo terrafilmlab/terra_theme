@@ -1,0 +1,58 @@
+{%- comment -%} Terra · Tabela de preços por processo, com caixa do prazo da semana. {%- endcomment -%}
+{%- assign s = section.settings -%}
+<section class="t-section t-bg-creme" id="precos">
+  <div class="t-wrap t-stack" style="max-width: 1080px; gap: 32px;">
+    <div class="t-head" style="margin: 0;">
+      <h2 class="t-display t-h2">{{ s.titulo }}</h2>
+      {%- if s.nota != blank -%}<p style="margin: 0; font-size: 15px;">{{ s.nota }}</p>{%- endif -%}
+    </div>
+    {%- if s.prazo_num != blank -%}
+      <div class="t-prazo-box">
+        <div style="display: flex; align-items: baseline; gap: 12px;"><span class="t-display" style="font-size: 64px; line-height: 1;">{{ s.prazo_num }}</span><strong>{{ s.prazo_unidade }}</strong></div>
+        <p style="margin: 0; flex: 1 1 320px;">{{ s.prazo_texto }}</p>
+      </div>
+    {%- endif -%}
+    <div class="t-prices" role="table" aria-label="Preços de revelação">
+      <div class="t-prices__row t-prices__head" role="row"><span role="columnheader">{{ s.col1 }}</span><span role="columnheader">{{ s.col2 }}</span><span role="columnheader">{{ s.col3 }}</span></div>
+      {%- for block in section.blocks -%}
+        {%- assign b = block.settings -%}
+        <a class="t-prices__row" role="row" href="{{ b.produto.url | default: '#' }}" {{ block.shopify_attributes }}>
+          <span role="cell"><span class="t-display" style="font-size: 26px;">{{ b.processo }}</span> <span style="margin-left: 10px;">{{ b.descricao }}</span></span>
+          <span role="cell" class="t-prices__val">{{ b.preco_rev }}</span>
+          <span role="cell" class="t-prices__val">{{ b.preco_scan }}</span>
+        </a>
+      {%- endfor -%}
+    </div>
+    {%- if s.extras != blank -%}<div class="t-prices__extras t-rte">{{ s.extras }}</div>{%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Terra · Preços",
+  "tag": "div",
+  "settings": [
+    { "type": "text", "id": "titulo", "label": "Título", "default": "Preços" },
+    { "type": "text", "id": "nota", "label": "Nota", "default": "Preço por rolo, com IVA." },
+    { "type": "header", "content": "Prazo da semana" },
+    { "type": "text", "id": "prazo_num", "label": "Número", "default": "24" },
+    { "type": "text", "id": "prazo_unidade", "label": "Unidade", "default": "horas" },
+    { "type": "text", "id": "prazo_texto", "label": "Texto", "default": "É quanto está a demorar esta semana, desde que os rolos chegam ao lab até receberes os scans." },
+    { "type": "header", "content": "Tabela" },
+    { "type": "text", "id": "col1", "label": "Coluna 1", "default": "Processo" },
+    { "type": "text", "id": "col2", "label": "Coluna 2", "default": "Só revelação" },
+    { "type": "text", "id": "col3", "label": "Coluna 3", "default": "+ scan" },
+    { "type": "richtext", "id": "extras", "label": "Extras", "default": "<p>Push ou pull: mais 2 € por rolo.</p><p>Envio para o lab via DPD: 5 €, grátis a partir do 3.º rolo.</p><p>Devolução dos negativos via DPD: 5 €.</p>" }
+  ],
+  "blocks": [
+    { "type": "processo", "name": "Processo", "settings": [
+      { "type": "text", "id": "processo", "label": "Processo", "default": "C-41" },
+      { "type": "text", "id": "descricao", "label": "Descrição", "default": "cor" },
+      { "type": "text", "id": "preco_rev", "label": "Só revelação", "default": "6 €" },
+      { "type": "text", "id": "preco_scan", "label": "Com scan", "default": "12 €" },
+      { "type": "product", "id": "produto", "label": "Produto" }
+    ] }
+  ],
+  "presets": [{ "name": "Terra · Preços" }]
+}
+{% endschema %}

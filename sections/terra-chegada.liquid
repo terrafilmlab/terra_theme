@@ -1,0 +1,58 @@
+{%- comment -%} Terra · Como chegar ao lab (balcão ou DPD) e o que acontece depois. {%- endcomment -%}
+{%- assign s = section.settings -%}
+<section class="t-section t-bg-areia" id="como">
+  <div class="t-wrap t-stack" style="max-width: 1180px; gap: 56px;">
+    <h2 class="t-display t-h2" style="max-width: 14em;">{{ s.titulo }}</h2>
+    <div class="t-row" style="gap: 48px 72px;">
+      {%- for block in section.blocks -%}
+        <div class="t-way" {{ block.shopify_attributes }}>
+          {%- if block.settings.ilu != 'nenhuma' -%}<img class="t-ilu" src="{{ block.settings.ilu | asset_url }}" alt="" loading="lazy" width="640" height="640" style="width: 100px; height: auto; flex: none;">{%- endif -%}
+          <div class="t-stack" style="gap: 10px;">
+            <h3 class="t-display t-h3">{{ block.settings.titulo }}</h3>
+            <div class="t-rte">{{ block.settings.texto }}</div>
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+    {%- if s.depois_titulo != blank -%}
+      <div class="t-after">
+        <div class="t-stack" style="flex: 2 1 460px; gap: 12px;">
+          <h3 class="t-display t-h3">{{ s.depois_titulo }}</h3>
+          <div class="t-rte">{{ s.depois_texto }}</div>
+        </div>
+        <div class="t-after__ilus" aria-hidden="true">
+          <img src="{{ 'terra-ilu-37-castanho.webp' | asset_url }}" alt="" loading="lazy" width="640" height="640" style="width: 64px;">
+          <img src="{{ 'terra-ilu-56-castanho.webp' | asset_url }}" alt="" loading="lazy" width="640" height="640" style="width: 104px;">
+          <img src="{{ 'terra-ilu-34-castanho.webp' | asset_url }}" alt="" loading="lazy" width="640" height="640" style="width: 82px;">
+        </div>
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Terra · Como chegar",
+  "tag": "div",
+  "settings": [
+    { "type": "text", "id": "titulo", "label": "Título", "default": "Como chegam os teus rolos <em>até nós</em>" },
+    { "type": "text", "id": "depois_titulo", "label": "Caixa final · título", "default": "E depois?" },
+    { "type": "richtext", "id": "depois_texto", "label": "Caixa final · texto", "default": "<p>Cada envelope leva uma etiqueta com o número da tua encomenda e cada rolo leva o seu par, para nada se perder pelo caminho. Revelamos, digitalizamos e mandamos-te um email com uma galeria privada, que fica aberta 3 dias.</p><p>Os negativos ficam cá guardados 3 meses. Podes vir buscá-los ou <a href=\"/products/devolucao-negativos-dpd\">pedir que os enviemos</a>, de uma vez com os de várias encomendas.</p>" }
+  ],
+  "blocks": [
+    { "type": "caminho", "name": "Caminho", "settings": [
+      { "type": "text", "id": "titulo", "label": "Título", "default": "Se estás no Porto" },
+      { "type": "richtext", "id": "texto", "label": "Texto", "default": "<p>Texto</p>" },
+      { "type": "select", "id": "ilu", "label": "Ilustração", "default": "terra-ilu-04-castanho.webp", "options": [
+        { "value": "nenhuma", "label": "Nenhuma" },
+        { "value": "terra-ilu-04-castanho.webp", "label": "Mão (04)" },
+        { "value": "terra-ilu-03-castanho.webp", "label": "Envelope (03)" },
+        { "value": "terra-ilu-37-castanho.webp", "label": "37" },
+        { "value": "terra-ilu-56-castanho.webp", "label": "56" },
+        { "value": "terra-ilu-34-castanho.webp", "label": "34" }
+      ] }
+    ] }
+  ],
+  "presets": [{ "name": "Terra · Como chegar" }]
+}
+{% endschema %}

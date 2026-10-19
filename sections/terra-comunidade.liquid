@@ -1,0 +1,36 @@
+{%- comment -%} Terra · Um lab de comunidade (workshops, câmara escura, passeios). {%- endcomment -%}
+{%- assign s = section.settings -%}
+<section class="t-section t-bg-terracota">
+  <div class="t-wrap t-row" style="max-width: 1180px; gap: 40px 72px; align-items: center;">
+    <div class="t-stack" style="flex: 1 1 360px; gap: 18px;">
+      <img class="t-ilu" src="{{ 'terra-ilu-70-cru.webp' | asset_url }}" alt="" loading="lazy" width="640" height="640" style="width: 104px; height: auto;">
+      <h2 class="t-display t-h2">{{ s.titulo }}</h2>
+      <div class="t-rte" style="font-size: 19px;">{{ s.texto }}</div>
+      {%- if s.texto2 != blank -%}<div class="t-rte">{{ s.texto2 }}</div>{%- endif -%}
+    </div>
+    <div class="t-list" style="flex: 1 1 460px;">
+      {%- for block in section.blocks -%}
+        <div class="t-list__row" {{ block.shopify_attributes }}><span class="t-display" style="font-size: 22px; min-width: 150px;">{{ block.settings.nome }}</span><span>{{ block.settings.estado }}</span></div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Terra · Comunidade",
+  "tag": "div",
+  "settings": [
+    { "type": "text", "id": "titulo", "label": "Título", "default": "Um lab <em>de comunidade</em>" },
+    { "type": "richtext", "id": "texto", "label": "Texto", "default": "<p>A Terra não é só um sítio onde se deixam rolos. Queremos que seja um sítio onde se aparece, se tira dúvidas e se conhece quem também fotografa em filme.</p>" },
+    { "type": "richtext", "id": "texto2", "label": "Texto secundário", "default": "<p>Estamos a preparar as primeiras coisas. Quem estiver na newsletter sabe primeiro.</p>" }
+  ],
+  "blocks": [
+    { "type": "atividade", "name": "Atividade", "settings": [
+      { "type": "text", "id": "nome", "label": "Nome", "default": "Workshops" },
+      { "type": "text", "id": "estado", "label": "Estado ou data", "default": "A anunciar" }
+    ] }
+  ],
+  "presets": [{ "name": "Terra · Comunidade" }]
+}
+{% endschema %}

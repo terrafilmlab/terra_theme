@@ -1,0 +1,44 @@
+{%- comment -%} Terra · Scan 10K, com ficha técnica. {%- endcomment -%}
+{%- assign s = section.settings -%}
+<section class="t-section t-bg-castanho" id="scan-10k">
+  <div class="t-wrap t-feature">
+    <div class="t-feature__text">
+      <img class="t-ilu" src="{{ 'terra-ilu-40-cru.webp' | asset_url }}" alt="" loading="lazy" width="640" height="640" style="width: 76px; height: auto;">
+      <h2 class="t-display t-feature__title">{{ s.titulo }}</h2>
+      {%- if s.texto != blank -%}<div class="t-rte">{{ s.texto }}</div>{%- endif -%}
+      <dl class="t-spec">
+        {%- for block in section.blocks -%}
+          <dt {{ block.shopify_attributes }}>{{ block.settings.campo }}</dt><dd>{{ block.settings.valor }}</dd>
+        {%- endfor -%}
+      </dl>
+      {%- if s.nota != blank -%}<p style="margin: 0; font-size: 15px; opacity: .8;">{{ s.nota }}</p>{%- endif -%}
+    </div>
+    <div class="t-photo t-feature__media">
+      {%- if s.imagem != blank -%}
+        {{ s.imagem | image_url: width: 1400 | image_tag: loading: 'lazy', sizes: '(min-width: 990px) 55vw, 100vw', widths: '600, 900, 1400', alt: s.imagem.alt }}
+      {%- else -%}
+        {{ 'lifestyle-2' | placeholder_svg_tag }}
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Terra · Scan 10K",
+  "tag": "div",
+  "settings": [
+    { "type": "text", "id": "titulo", "label": "Título", "default": "Scan <em>10K</em>" },
+    { "type": "richtext", "id": "texto", "label": "Texto (opcional)" },
+    { "type": "text", "id": "nota", "label": "Nota", "default": "Preço a anunciar." },
+    { "type": "image_picker", "id": "imagem", "label": "Imagem (um scan 10K com as bordas do negativo)" }
+  ],
+  "blocks": [
+    { "type": "spec", "name": "Linha da ficha", "settings": [
+      { "type": "text", "id": "campo", "label": "Campo", "default": "Formato" },
+      { "type": "text", "id": "valor", "label": "Valor", "default": "TIFF, 16 bits" }
+    ] }
+  ],
+  "presets": [{ "name": "Terra · Scan 10K" }]
+}
+{% endschema %}

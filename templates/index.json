@@ -3,218 +3,312 @@
     "hero": {
       "type": "terra-hero",
       "settings": {
-        "link2": "#como-funciona",
-        "titulo": "Revelação e scan <em>feitos à mão</em>"
+        "link1": "shopify://collections/revelacao-scan",
+        "link2": "#precos"
       }
     },
-    "processos": {
-      "type": "terra-processos",
-      "blocks": {
-        "c41": {
-          "type": "processo",
-          "settings": {
-            "titulo": "C-41",
-            "subtitulo": "Negativo a cores · 35mm, 120",
-            "preco": "desde 6 €",
-            "link": "shopify://products/revelacao-c41"
-          }
-        },
-        "pb": {
-          "type": "processo",
-          "settings": {
-            "titulo": "P&B",
-            "subtitulo": "Preto e branco · 35mm, 120",
-            "preco": "desde 8 €",
-            "link": "shopify://products/revelacao-pb"
-          }
-        },
-        "e6": {
-          "type": "processo",
-          "settings": {
-            "titulo": "E-6",
-            "subtitulo": "Diapositivo · 35mm, 120",
-            "preco": "desde 12 €",
-            "link": "shopify://products/revelacao-e6"
-          }
-        },
-        "ecn2": {
-          "type": "processo",
-          "settings": {
-            "titulo": "ECN-2",
-            "subtitulo": "Película de cinema · 35mm",
-            "preco": "desde 14 €",
-            "link": "shopify://products/revelacao-ecn2"
-          }
-        }
-      },
-      "block_order": [
-        "c41",
-        "pb",
-        "e6",
-        "ecn2"
-      ],
-      "settings": {
-        "fundo": "creme",
-        "link": "shopify://collections/revelacao-scan"
-      }
-    },
-    "como": {
-      "type": "terra-como-funciona",
-      "blocks": {
-        "balcao": {
-          "type": "caminho",
-          "settings": {
-            "titulo": "Entregas no lab",
-            "passos": "<ol><li>Encomendas online o processo e o scan.</li><li>Trazes os rolos à Rua Duque de Saldanha 345, em Bonfim.</li><li>Sem portes, sem espera ao balcão.</li></ol>",
-            "ilu": "terra-ilu-04-castanho.webp"
-          }
-        },
-        "dpd": {
-          "type": "caminho",
-          "settings": {
-            "titulo": "Envias pela DPD",
-            "selo": "Grátis a partir de 3 rolos",
-            "passos": "<ol><li>Encomendas online e escolhes envio DPD.</li><li>Recebes por email a etiqueta e a folha de envio com o teu código.</li><li>Deixas o envelope num ponto DPD Pickup. Com 1 ou 2 rolos pagas os portes, a partir do 3.º é por nossa conta.</li></ol>",
-            "ilu": "terra-ilu-03-castanho.webp"
-          }
-        },
-        "p1": {
-          "type": "passo",
-          "settings": {
-            "titulo": "01 · Revelamos",
-            "texto": "Cada rolo é etiquetado e acompanhado em todas as fases.",
-            "ilu": "terra-ilu-37-castanho.webp"
-          }
-        },
-        "p2": {
-          "type": "passo",
-          "settings": {
-            "titulo": "02 · Scans por email",
-            "texto": "Uma galeria privada para ver e descarregar durante 3 dias.",
-            "ilu": "terra-ilu-56-castanho.webp"
-          }
-        },
-        "p3": {
-          "type": "passo",
-          "settings": {
-            "titulo": "03 · Negativos",
-            "texto": "Guardamos 3 meses sem custo. Levantas no lab ou pedes por DPD quando quiseres.",
-            "ilu": "terra-ilu-34-castanho.webp"
-          }
-        }
-      },
-      "block_order": [
-        "balcao",
-        "dpd",
-        "p1",
-        "p2",
-        "p3"
-      ],
-      "settings": {
-        "titulo": "Como <em>funciona</em>"
-      }
-    },
-    "scan10k": {
-      "type": "terra-destaque",
-      "settings": {
-        "fundo": "castanho",
-        "ilu": "terra-ilu-40-cru.webp"
-      }
-    },
-    "pelicula": {
-      "type": "terra-produtos",
-      "settings": {
-        "titulo": "Filmes",
-        "limite": 4,
-        "colecao": "filmes",
-        "link_texto": "Ver todos os filmes"
-      }
-    },
-    "galeria": {
-      "type": "terra-galeria",
+    "fita": {
+      "type": "terra-fita",
       "blocks": {
         "f1": {
-          "type": "foto",
+          "type": "frase",
           "settings": {
-            "legenda": "Portra 400 · autor"
+            "texto": "Revelamos no Bonfim, Porto"
           }
         },
         "f2": {
-          "type": "foto",
+          "type": "frase",
           "settings": {
-            "legenda": "HP5 Plus · autor"
+            "texto": "Envio para o lab grátis a partir de 3 rolos"
           }
         },
         "f3": {
-          "type": "foto",
+          "type": "frase",
           "settings": {
-            "legenda": "Terra 500T · autor"
+            "texto": "Push e pull, de -2 a +3"
+          }
+        },
+        "f4": {
+          "type": "frase",
+          "settings": {
+            "texto": "Negativos guardados 3 meses"
+          }
+        },
+        "f5": {
+          "type": "frase",
+          "settings": {
+            "texto": "Scan 10K em TIFF de 16 bits"
+          }
+        },
+        "f6": {
+          "type": "frase",
+          "settings": {
+            "texto": "35 mm e 120"
           }
         }
       },
       "block_order": [
         "f1",
         "f2",
-        "f3"
+        "f3",
+        "f4",
+        "f5",
+        "f6"
       ],
+      "settings": {}
+    },
+    "precos": {
+      "type": "terra-precos",
+      "blocks": {
+        "p1": {
+          "type": "processo",
+          "settings": {
+            "processo": "C-41",
+            "descricao": "cor",
+            "preco_rev": "6 €",
+            "preco_scan": "12 €",
+            "produto": "revelacao-c41"
+          }
+        },
+        "p2": {
+          "type": "processo",
+          "settings": {
+            "processo": "P&amp;B",
+            "descricao": "preto e branco",
+            "preco_rev": "8 €",
+            "preco_scan": "14 €",
+            "produto": "revelacao-pb"
+          }
+        },
+        "p3": {
+          "type": "processo",
+          "settings": {
+            "processo": "E-6",
+            "descricao": "positivo",
+            "preco_rev": "12 €",
+            "preco_scan": "18 €",
+            "produto": "revelacao-e6"
+          }
+        },
+        "p4": {
+          "type": "processo",
+          "settings": {
+            "processo": "ECN-2",
+            "descricao": "película de cinema",
+            "preco_rev": "14 €",
+            "preco_scan": "20 €",
+            "produto": "revelacao-ecn2"
+          }
+        }
+      },
+      "block_order": [
+        "p1",
+        "p2",
+        "p3",
+        "p4"
+      ],
+      "settings": {}
+    },
+    "como": {
+      "type": "terra-chegada",
+      "blocks": {
+        "c1": {
+          "type": "caminho",
+          "settings": {
+            "titulo": "Se estás no Porto",
+            "ilu": "terra-ilu-04-castanho.webp",
+            "texto": "<p>Encomendas aqui no site, pagas, e trazes os rolos ao número 345 da Rua Duque de Saldanha, dentro do horário do lab. Sem portes.</p>"
+          }
+        },
+        "c2": {
+          "type": "caminho",
+          "settings": {
+            "titulo": "Se não estás",
+            "ilu": "terra-ilu-03-castanho.webp",
+            "texto": "<p>Escolhes envio DPD na encomenda. Mandamos-te a etiqueta por email, colas no envelope e deixas num ponto DPD Pickup. Com 3 rolos ou mais, a etiqueta fica por nossa conta.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "c1",
+        "c2"
+      ],
+      "settings": {}
+    },
+    "scan10k": {
+      "type": "terra-scan10k",
+      "blocks": {
+        "s1": {
+          "type": "spec",
+          "settings": {
+            "campo": "Formato",
+            "valor": "TIFF, 16 bits"
+          }
+        },
+        "s2": {
+          "type": "spec",
+          "settings": {
+            "campo": "Resolução",
+            "valor": "cerca de 10.000 píxeis no lado maior"
+          }
+        },
+        "s3": {
+          "type": "spec",
+          "settings": {
+            "campo": "Enquadramento",
+            "valor": "fotograma completo, com as bordas do negativo"
+          }
+        }
+      },
+      "block_order": [
+        "s1",
+        "s2",
+        "s3"
+      ],
+      "settings": {}
+    },
+    "pelicula": {
+      "type": "terra-produtos",
       "settings": {
-        "titulo": "Feito na <em>Terra</em>"
+        "titulo": "Os nossos favoritos da semana",
+        "colecao": "filmes",
+        "limite": 4,
+        "link_texto": "",
+        "fundo": "areia"
       }
+    },
+    "comunidade": {
+      "type": "terra-comunidade",
+      "blocks": {
+        "a1": {
+          "type": "atividade",
+          "settings": {
+            "nome": "Workshops",
+            "estado": "Primeiro tema e data a anunciar"
+          }
+        },
+        "a2": {
+          "type": "atividade",
+          "settings": {
+            "nome": "Câmara escura",
+            "estado": "A anunciar"
+          }
+        },
+        "a3": {
+          "type": "atividade",
+          "settings": {
+            "nome": "Passeios",
+            "estado": "A anunciar"
+          }
+        }
+      },
+      "block_order": [
+        "a1",
+        "a2",
+        "a3"
+      ],
+      "settings": {}
+    },
+    "galeria": {
+      "type": "terra-galeria",
+      "blocks": {
+        "g1": {
+          "type": "foto",
+          "settings": {
+            "legenda": "@autor · película"
+          }
+        },
+        "g2": {
+          "type": "foto",
+          "settings": {
+            "legenda": "@autor · película"
+          }
+        },
+        "g3": {
+          "type": "foto",
+          "settings": {
+            "legenda": "@autor · película"
+          }
+        },
+        "g4": {
+          "type": "foto",
+          "settings": {
+            "legenda": "@autor · película"
+          }
+        }
+      },
+      "block_order": [
+        "g1",
+        "g2",
+        "g3",
+        "g4"
+      ],
+      "settings": {}
+    },
+    "faq": {
+      "type": "terra-faq",
+      "blocks": {
+        "q1": {
+          "type": "pergunta",
+          "settings": {
+            "pergunta": "Quanto tempo demora?",
+            "resposta": "<p>Depende do processo. Os prazos de cada um estão sempre atualizados na barra no topo do site.</p>"
+          }
+        },
+        "q2": {
+          "type": "pergunta",
+          "settings": {
+            "pergunta": "Posso juntar rolos diferentes na mesma encomenda?",
+            "resposta": "<p>Podes. Adiciona ao carrinho cada combinação de processo e digitalização em separado, e paga tudo de uma vez.</p>"
+          }
+        },
+        "q3": {
+          "type": "pergunta",
+          "settings": {
+            "pergunta": "Fazem push e pull?",
+            "resposta": "<p>Fazemos, de pull 2 a push 3. São mais 2 € por rolo, ou 1 € a partir de 3 rolos do mesmo processo.</p>"
+          }
+        },
+        "q4": {
+          "type": "pergunta",
+          "settings": {
+            "pergunta": "O que acontece aos negativos?",
+            "resposta": "<p>Ficam guardados no lab 3 meses. Podes vir buscá-los quando quiseres ou pedir que os enviemos pela DPD por 5 €.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "q1",
+        "q2",
+        "q3",
+        "q4"
+      ],
+      "settings": {}
     },
     "visita": {
       "type": "terra-visita",
-      "settings": {
-        "titulo": "Visita <em>o lab</em>"
-      }
+      "settings": {}
     },
     "newsletter": {
       "type": "terra-newsletter",
       "settings": {
         "titulo": "Novidades do <em>lab</em>",
-        "ilu": "terra-ilu-01-cru.webp"
+        "texto": "Filme novo, prazos e o que andamos a fazer. Só quando há alguma coisa para contar.",
+        "ilu": "terra-ilu-01-cru.webp",
+        "botao": "Quero receber"
       }
-    },
-    "categorias": {
-      "type": "terra-categorias",
-      "blocks": {
-        "acessorios": {
-          "type": "categoria",
-          "settings": {
-            "colecao": "acessorios",
-            "texto": "Malas, straps, e tudo o que anda com a câmara."
-          }
-        },
-        "livros": {
-          "type": "categoria",
-          "settings": {
-            "colecao": "livros",
-            "texto": "Fotolivros e livros sobre fotografia."
-          }
-        },
-        "merch": {
-          "type": "categoria",
-          "settings": {
-            "colecao": "merch",
-            "texto": "Para levar a Terra contigo."
-          }
-        }
-      },
-      "block_order": [
-        "acessorios",
-        "livros",
-        "merch"
-      ],
-      "settings": {}
     }
   },
   "order": [
     "hero",
-    "processos",
+    "fita",
+    "precos",
     "como",
     "scan10k",
     "pelicula",
-    "categorias",
+    "comunidade",
     "galeria",
+    "faq",
     "visita",
     "newsletter"
   ]

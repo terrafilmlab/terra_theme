@@ -1,0 +1,24 @@
+{%- comment -%} Terra · Fita em movimento com a estrela da marca entre frases. {%- endcomment -%}
+{%- capture frases -%}{%- for block in section.blocks -%}<span {{ block.shopify_attributes }}>{{ block.settings.texto }}</span>{%- endfor -%}{%- endcapture -%}
+<div class="t-fita" style="--t-estrela: url('{{ 'terra-estrela-65-cru.webp' | asset_url }}');" aria-label="{% for block in section.blocks %}{{ block.settings.texto | escape }}{% unless forloop.last %} · {% endunless %}{% endfor %}">
+  <div class="t-fita__in" aria-hidden="true">{{ frases }}{{ frases }}</div>
+</div>
+
+{% schema %}
+{
+  "name": "Terra · Fita",
+  "tag": "section",
+  "settings": [],
+  "blocks": [
+    { "type": "frase", "name": "Frase", "settings": [ { "type": "text", "id": "texto", "label": "Texto", "default": "Revelamos no Bonfim, Porto" } ] }
+  ],
+  "presets": [{ "name": "Terra · Fita", "blocks": [
+    { "type": "frase", "settings": { "texto": "Revelamos no Bonfim, Porto" } },
+    { "type": "frase", "settings": { "texto": "Envio para o lab grátis a partir de 3 rolos" } },
+    { "type": "frase", "settings": { "texto": "Push e pull, de -2 a +3" } },
+    { "type": "frase", "settings": { "texto": "Negativos guardados 3 meses" } },
+    { "type": "frase", "settings": { "texto": "Scan 10K em TIFF de 16 bits" } },
+    { "type": "frase", "settings": { "texto": "35 mm e 120" } }
+  ] }]
+}
+{% endschema %}

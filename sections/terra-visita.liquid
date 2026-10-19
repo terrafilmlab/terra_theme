@@ -1,14 +1,14 @@
+{%- comment -%} Terra · Passa pelo lab. {%- endcomment -%}
 {%- assign s = section.settings -%}
-<section class="t-section t-bg-areia" id="lab">
+<section class="t-section t-bg-creme" id="lab">
   <div class="t-wrap t-visit">
-    <div class="t-visit__text">
+    <div class="t-visit__text" style="gap: 18px;">
       <h2 class="t-display t-h2">{{ s.titulo }}</h2>
-      <div class="t-lead t-rte">{{ s.morada }}</div>
-      <dl style="margin: 0;">
-        {%- if s.horario != blank -%}<dt>Horário</dt><dd class="t-rte">{{ s.horario }}</dd>{%- endif -%}
-        {%- if s.email != blank -%}<dt>Contacto</dt><dd><a href="mailto:{{ s.email }}">{{ s.email }}</a></dd>{%- endif -%}
-      </dl>
-      {%- if s.mapa != blank -%}<div><a class="t-btn2" href="{{ s.mapa }}" target="_blank" rel="noopener">Ver no mapa</a></div>{%- endif -%}
+      <div class="t-rte" style="font-size: 20px;">{{ s.morada }}</div>
+      {%- if s.horario != blank -%}<div class="t-rte">{{ s.horario }}</div>{%- endif -%}
+      {%- if s.aviso != blank -%}<div class="t-rte" style="font-size: 15px;">{{ s.aviso }}</div>{%- endif -%}
+      {%- if s.email != blank -%}<p style="margin: 0;">{{ s.email_texto }} <a href="mailto:{{ s.email }}">{{ s.email }}</a>.</p>{%- endif -%}
+      {%- if s.mapa != blank -%}<div><a class="t-link" href="{{ s.mapa }}" target="_blank" rel="noopener">Abrir no mapa</a></div>{%- endif -%}
     </div>
     <div class="t-photo t-visit__media">
       {%- if s.imagem != blank -%}
@@ -22,16 +22,18 @@
 
 {% schema %}
 {
-  "name": "Terra · Visita o lab",
+  "name": "Terra · Passa pelo lab",
   "tag": "div",
   "settings": [
-    { "type": "text", "id": "titulo", "label": "Título", "default": "Visita o lab" },
-    { "type": "richtext", "id": "morada", "label": "Morada", "default": "<p>Rua Duque de Saldanha 345<br>4300-465 Porto</p>" },
+    { "type": "text", "id": "titulo", "label": "Título", "default": "Passa <em>pelo lab</em>" },
+    { "type": "richtext", "id": "morada", "label": "Morada", "default": "<p>Rua Duque de Saldanha 345<br>4300-465 Porto, no Bonfim</p>" },
     { "type": "richtext", "id": "horario", "label": "Horário", "default": "<p>Dias e horas de abertura</p>" },
+    { "type": "richtext", "id": "aviso", "label": "Aviso", "default": "<p>Se fecharmos fora do normal, por férias ou feriados, avisamos aqui e na barra do topo.</p>" },
+    { "type": "text", "id": "email_texto", "label": "Texto antes do email", "default": "Dúvidas antes de mandar os rolos? Escreve para" },
     { "type": "text", "id": "email", "label": "Email", "default": "hello@terrafilmlab.com" },
     { "type": "url", "id": "mapa", "label": "Link do mapa" },
-    { "type": "image_picker", "id": "imagem", "label": "Foto do lab" }
+    { "type": "image_picker", "id": "imagem", "label": "Foto (a porta do 345)" }
   ],
-  "presets": [{ "name": "Terra · Visita o lab" }]
+  "presets": [{ "name": "Terra · Passa pelo lab" }]
 }
 {% endschema %}
