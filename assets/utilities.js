@@ -809,7 +809,9 @@ export function setHeaderMenuStyle() {
     window.requestAnimationFrame(() => {
       const overflowList = headerComponent?.querySelector('overflow-list');
       const hasReachedMinimum = overflowList && overflowList.hasAttribute('minimum-reached');
-      headerComponent.dataset.menuStyle = isTouchDevice() || hasReachedMinimum ? 'drawer' : 'menu';
+      // Terra: o menu abre sempre pelo botão de três traços (drawer), também no computador.
+      void hasReachedMinimum;
+      headerComponent.dataset.menuStyle = 'drawer';
     });
   }
 }

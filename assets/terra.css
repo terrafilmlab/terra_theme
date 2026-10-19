@@ -220,3 +220,25 @@ a.t-prices__row:hover { color: var(--terra-azul); }
 .t-toplinks a:hover { color: var(--terra-azul); }
 .t-lang a[aria-current="true"] { text-decoration: underline; text-underline-offset: 4px; }
 @media (max-width: 749px) { .t-toplinks { display: none; } }
+
+/* Menu em gaveta (três traços) com a ilustração 37 em cru no fundo */
+#header-component .menu-drawer,
+#header-component .menu-drawer__submenu {
+  background-color: var(--terra-terracota);
+  background-image: var(--terra-ilu-37-fundo);
+  background-repeat: no-repeat;
+  background-position: right -60px bottom -40px;
+  background-size: min(78%, 420px) auto;
+  color: var(--terra-creme);
+}
+#header-component .menu-drawer .menu-drawer__menu-item--mainlist,
+#header-component .menu-drawer .menu-drawer__menu-item--mainlist .menu-drawer__menu-item-text {
+  font-family: "Zalando Sans SemiExpanded", "Gantari", sans-serif;
+  font-weight: 800;
+  font-size: clamp(26px, 3vw, 34px);
+  letter-spacing: -.01em;
+  color: var(--terra-creme);
+}
+#header-component .menu-drawer a,
+#header-component .menu-drawer .header-drawer-icon { color: var(--terra-creme); }
+@media (min-width: 750px) { #header-component .menu-drawer { --drawer-max-width: 460px; } }
