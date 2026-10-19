@@ -242,3 +242,7 @@ a.t-prices__row:hover { color: var(--terra-azul); }
 #header-component .menu-drawer a,
 #header-component .menu-drawer .header-drawer-icon { color: var(--terra-creme); }
 @media (min-width: 750px) { #header-component .menu-drawer { --drawer-max-width: 460px; } }
+@media (min-width: 750px) {
+  #header-component[data-menu-style='drawer'] .header__row--top .header__columns { grid-template-columns: 44px minmax(0, 1fr) auto minmax(0, 1fr) auto; }
+  #header-component[data-menu-style='drawer'] .t-toplinks { grid-area: rightA; justify-self: end; }
+}
