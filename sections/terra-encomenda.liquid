@@ -8,6 +8,14 @@
 {%- liquid
   assign s = section.settings
   assign v0 = product.selected_or_first_available_variant
+  if product.selected_variant == blank
+    for v in product.variants
+      if v.available and v.options contains 'Normal'
+        assign v0 = v
+        break
+      endif
+    endfor
+  endif
   assign envio = s.envio_produto.selected_or_first_available_variant
   assign devolucao = s.devolucao_produto.selected_or_first_available_variant
   assign sid = section.id
