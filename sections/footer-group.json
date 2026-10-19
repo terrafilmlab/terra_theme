@@ -270,7 +270,9 @@
         "col3",
         "col4"
       ],
-      "settings": {}
+      "settings": {
+        "reclamacoes": "https://www.livroreclamacoes.pt"
+      }
     }
   },
   "order": [
