@@ -98,7 +98,11 @@
         "border_width": 0,
         "enable_transparent_header_home": false,
         "enable_transparent_header_product": false,
-        "enable_transparent_header_collection": false
+        "enable_transparent_header_collection": false,
+        "background_color_top": "#F8F2E0",
+        "text_color_top": "#48191C",
+        "background_color_bottom": "#8F4739",
+        "text_color_bottom": "#F8F2E0"
       }
     },
     "terra_prazos": {

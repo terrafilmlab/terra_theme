@@ -197,7 +197,7 @@ a.t-prices__row:hover { color: var(--terra-azul); }
 
 /* Faixa terracota do menu principal (linha de baixo do cabeçalho) */
 @media (min-width: 750px) {
-  #header-component .header__row--bottom { background: var(--terra-terracota); }
+  #header-component .header__row--bottom .header__columns { --padding-block-start: 6px; --padding-block-end: 6px; }
   #header-component .header__row--bottom .menu-list__link { color: var(--terra-creme); font-size: 18px; font-weight: 500; }
   #header-component .header__row--bottom .menu-list__link:hover { color: var(--terra-branco); }
 }
