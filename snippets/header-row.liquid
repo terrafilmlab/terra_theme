@@ -69,6 +69,7 @@
       class="header__column header__column--{{ column }}"
       data-testid="header-{{ row }}-{{ column }}"
     >
+      {%- if row == 'top' and column == 'right' -%}{% render 'terra-header-links' %}{%- endif -%}
       {% for key in items_array %}
         {% unless key == blank %}
           {% case key %}

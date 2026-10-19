@@ -1,0 +1,44 @@
+{%- comment -%}
+  Terra · Links pequenos do cabeçalho (Como funciona, Contactos) e o seletor PT · EN.
+  Renderizado em snippets/header-row.liquid, no início da coluna da direita da linha de cima.
+{%- endcomment -%}
+{%- liquid
+  assign en = false
+  if request.locale.iso_code == 'en'
+    assign en = true
+  endif
+  assign home = routes.root_url
+  if home == '/'
+    assign home = ''
+  endif
+  assign cur_root = request.locale.root_url
+  assign path = request.path
+  if cur_root != '/'
+    assign path = path | remove_first: cur_root
+  endif
+  if path == ''
+    assign path = '/'
+  endif
+-%}
+<nav class="t-toplinks mobile:hidden" aria-label="{% if en %}Quick links{% else %}Atalhos{% endif %}">
+  <a href="{{ home }}/#como">{% if en %}How it works{% else %}Como funciona{% endif %}</a>
+  <a href="{{ home }}/#lab">{% if en %}Contact{% else %}Contactos{% endif %}</a>
+  {%- if localization.available_languages.size > 1 -%}
+    <span class="t-lang">
+      {%- for l in localization.available_languages -%}
+        {%- liquid
+          assign code = l.iso_code | split: '-' | first | upcase
+          if l.root_url == '/'
+            assign href = path
+          elsif path == '/'
+            assign href = l.root_url
+          else
+            assign href = l.root_url | append: path
+          endif
+        -%}
+        <a href="{{ href }}" hreflang="{{ l.iso_code }}" lang="{{ l.iso_code }}" {% if l.iso_code == request.locale.iso_code %}aria-current="true"{% endif %}>{{ code }}</a>
+        {%- unless forloop.last %}<span aria-hidden="true"> · </span>{% endunless -%}
+      {%- endfor -%}
+    </span>
+  {%- endif -%}
+</nav>
