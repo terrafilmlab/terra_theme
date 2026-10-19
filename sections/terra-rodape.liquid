@@ -1,0 +1,40 @@
+{%- comment -%} Terra · Rodapé (logo, colunas de links, linha legal). {%- endcomment -%}
+{%- assign s = section.settings -%}
+<footer class="t-foot">
+  <div class="t-wrap t-stack" style="gap: 48px;">
+    <div class="t-foot__top">
+      <a href="{{ routes.root_url }}" aria-label="{{ shop.name | escape }}"><img src="{{ 'terra-logo-filmlab-cru.webp' | asset_url }}" alt="{{ shop.name | escape }}" width="1200" height="529" loading="lazy" style="height: 72px; width: auto; display: block;"></a>
+      <div class="t-foot__cols">
+        {%- for block in section.blocks -%}
+          <div class="t-foot__col" {{ block.shopify_attributes }}>
+            <span class="t-foot__title">{{ block.settings.titulo }}</span>
+            <div class="t-rte">{{ block.settings.links }}</div>
+          </div>
+        {%- endfor -%}
+      </div>
+    </div>
+    <div class="t-foot__legal">
+      <span>{{ s.legal }}</span>
+      {%- if s.reclamacoes != blank -%}<a href="{{ s.reclamacoes }}" target="_blank" rel="noopener">Livro de Reclamações</a>{%- endif -%}
+    </div>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Terra · Rodapé",
+  "tag": "div",
+  "enabled_on": { "groups": ["footer"] },
+  "settings": [
+    { "type": "text", "id": "legal", "label": "Linha legal", "default": "Até já, no Bonfim. © 2026 Terra · FANCY SERENITY, LDA · NIF PT519620151" },
+    { "type": "url", "id": "reclamacoes", "label": "Link do Livro de Reclamações", "default": "https://www.livroreclamacoes.pt" }
+  ],
+  "blocks": [
+    { "type": "coluna", "name": "Coluna", "settings": [
+      { "type": "text", "id": "titulo", "label": "Título", "default": "Lab" },
+      { "type": "richtext", "id": "links", "label": "Links (um por linha)", "default": "<p><a href=\"/collections/revelacao-scan\">Revelação &amp; Scan</a></p>" }
+    ] }
+  ],
+  "presets": [{ "name": "Terra · Rodapé" }]
+}
+{% endschema %}

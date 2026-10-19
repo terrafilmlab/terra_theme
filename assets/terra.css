@@ -201,3 +201,14 @@ a.t-prices__row:hover { color: var(--terra-azul); }
   #header-component .header__row--bottom .menu-list__link { color: var(--terra-creme); font-size: 18px; font-weight: 500; }
   #header-component .header__row--bottom .menu-list__link:hover { color: var(--terra-branco); }
 }
+
+/* Rodapé */
+.t-foot { background: var(--terra-castanho); color: var(--terra-creme); padding: 72px 0 32px; font-family: var(--font-body--family); font-size: 15px; line-height: 1.5; }
+.t-foot a { color: var(--terra-creme); text-decoration: none; opacity: .85; }
+.t-foot a:hover { opacity: 1; text-decoration: underline; }
+.t-foot__top { display: flex; flex-wrap: wrap; gap: 40px; justify-content: space-between; }
+.t-foot__cols { display: flex; flex-wrap: wrap; gap: 40px 72px; }
+.t-foot__col { display: flex; flex-direction: column; gap: 8px; min-width: 140px; }
+.t-foot__col .t-rte p { margin: 0 0 8px; }
+.t-foot__title { font-weight: 700; }
+.t-foot__legal { border-top: 1px solid rgba(248,242,224,.25); padding-top: 20px; display: flex; flex-wrap: wrap; gap: 12px 28px; justify-content: space-between; font-size: 13px; opacity: .85; }

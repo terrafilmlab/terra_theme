@@ -185,7 +185,8 @@
         "background_color": "{{ settings.color_palette.color1 }}",
         "padding-block-start": 36,
         "padding-block-end": 36
-      }
+      },
+      "disabled": true
     },
     "utilities": {
       "type": "footer-utilities",
@@ -228,10 +229,52 @@
         "divider_thickness": 1,
         "padding-block-start": 12,
         "padding-block-end": 16
-      }
+      },
+      "disabled": true
+    },
+    "terra_rodape": {
+      "type": "terra-rodape",
+      "blocks": {
+        "col1": {
+          "type": "coluna",
+          "settings": {
+            "titulo": "Lab",
+            "links": "<p><a href=\"/collections/revelacao-scan\">Revelação &amp; Scan</a></p><p><a href=\"/#scan-10k\">Scan 10K</a></p><p><a href=\"/products/devolucao-negativos-dpd\">Pedir os meus negativos</a></p><p><a href=\"/#precos\">Prazos</a></p>"
+          }
+        },
+        "col2": {
+          "type": "coluna",
+          "settings": {
+            "titulo": "Loja",
+            "links": "<p><a href=\"/collections/filmes\">Filmes</a></p><p><a href=\"/collections/all\">Acessórios</a></p><p><a href=\"/collections/all\">Livros</a></p><p><a href=\"/collections/all\">Merch</a></p>"
+          }
+        },
+        "col3": {
+          "type": "coluna",
+          "settings": {
+            "titulo": "Ajuda",
+            "links": "<p><a href=\"/#faq\">Perguntas frequentes</a></p><p><a href=\"/policies/shipping-policy\">Envios e devoluções</a></p><p><a href=\"/policies/terms-of-service\">Termos e condições</a></p><p><a href=\"/policies/privacy-policy\">Privacidade</a></p>"
+          }
+        },
+        "col4": {
+          "type": "coluna",
+          "settings": {
+            "titulo": "Terra",
+            "links": "<p><a href=\"/#lab\">O lab</a></p><p><a href=\"mailto:hello@terrafilmlab.com\">Contactos</a></p><p><a href=\"https://www.instagram.com/terrafilmlab\">Instagram</a></p>"
+          }
+        }
+      },
+      "block_order": [
+        "col1",
+        "col2",
+        "col3",
+        "col4"
+      ],
+      "settings": {}
     }
   },
   "order": [
+    "terra_rodape",
     "footer",
     "utilities"
   ]
