@@ -9,6 +9,14 @@
  */
 {
   "terra": {
+    "scan": {
+      "h0": "Revelamos e ficas só com os negativos, sem ficheiros.",
+      "h1": "JPEG, cerca de 1500 × 1000 px. Chega para ver no telemóvel e partilhar.",
+      "h2": "JPEG, cerca de 3000 × 2000 px. O equilíbrio certo para a maioria dos rolos.",
+      "h3": "JPEG, cerca de 6000 × 4000 px. Para imprimir maior ou recortar.",
+      "h4": "TIFF, cerca de 6000 × 4000 px. Sem compressão, para editar a fundo.",
+      "h5": "TIFF de 16 bits, cerca de 10 000 px no lado maior, com as bordas do negativo. O rolo inteiro. Só queres alguns fotogramas? Há o Scan 10K por fotograma, a 7 €."
+    },
     "common": {
       "free": "Grátis",
       "email_ph": "o.teu@email.pt",

@@ -9,6 +9,14 @@
  */
 {
   "terra": {
+    "scan": {
+      "h0": "We develop and you get the negatives only, no files.",
+      "h1": "JPEG, about 1500 × 1000 px. Enough for phones and sharing.",
+      "h2": "JPEG, about 3000 × 2000 px. The right balance for most rolls.",
+      "h3": "JPEG, about 6000 × 4000 px. For bigger prints or cropping.",
+      "h4": "TIFF, about 6000 × 4000 px. Uncompressed, for serious editing.",
+      "h5": "16 bit TIFF, about 10,000 px on the long side, negative borders included. The whole roll. Only want a few frames? There’s the per frame 10K scan, at €7."
+    },
     "common": {
       "free": "Free",
       "email_ph": "you@email.com",

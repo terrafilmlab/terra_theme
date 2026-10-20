@@ -134,8 +134,8 @@
         "prazo_texto": "É quanto está a demorar esta semana, desde que os rolos chegam ao lab até receberes os scans.",
         "col1": "Processo",
         "col2": "Só revelação",
-        "col3": "+ scan",
-        "extras": "<p>Push ou pull: mais 2 € por rolo.</p><p>Envio para o lab via DPD: 5 €, grátis a partir do 3.º rolo.</p><p>Devolução dos negativos via DPD: 5 €.</p>"
+        "col3": "+ scan Standard",
+        "extras": "<p>Digitalização por rolo: Low 4 €, Standard 6 €, Alta JPEG 10 €, Alta TIFF 14 €, Scan 10K 40 €.</p><p>Push ou pull: mais 2 € por rolo.</p><p>Envio para o lab via DPD: 5 €, grátis a partir do 3.º rolo.</p><p>Devolução dos negativos via DPD: 5 €.</p>"
       }
     },
     "como": {
@@ -200,7 +200,8 @@
       ],
       "settings": {
         "titulo": "Scan <em>10K</em>",
-        "nota": "Preço a anunciar."
+        "nota": "40 € por rolo inteiro, ou 7 € por fotograma.",
+        "texto": "<p>Para os fotogramas de que gostas mesmo. Escolhe o rolo inteiro na <a href=\"/products/revelacao\">página de revelação</a>, ou só alguns em <a href=\"/products/scan-10k-fotograma\">Scan 10K por fotograma</a>.</p>"
       }
     },
     "pelicula": {

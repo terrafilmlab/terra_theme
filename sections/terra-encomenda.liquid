@@ -10,7 +10,7 @@
   assign v0 = product.selected_or_first_available_variant
   if product.selected_variant == blank
     for v in product.variants
-      if v.available and v.options contains 'Normal'
+      if v.available and v.options[2] contains 'Standard'
         assign v0 = v
         break
       endif
@@ -56,9 +56,11 @@
               <legend>{{ option.name }}</legend>
               <div class="t-pills">
                 {%- for value in option.values -%}
-                  <button type="button" class="t-pill" data-opt="{{ oi }}" data-val="{{ value | escape }}" aria-pressed="{% if v0.options[oi] == value %}true{% else %}false{% endif %}">{{ value }}</button>
+                  {%- capture hint -%}{%- if oi == 2 -%}{{ 'terra.scan.h' | append: forloop.index0 | t }}{%- endif -%}{%- endcapture -%}
+                  <button type="button" class="t-pill" data-opt="{{ oi }}" data-val="{{ value | escape }}"{% if oi == 2 %} data-hint="{{ hint | escape }}"{% endif %} aria-pressed="{% if v0.options[oi] == value %}true{% else %}false{% endif %}">{{ value }}</button>
                 {%- endfor -%}
               </div>
+              {%- if oi == 2 -%}<span class="t-small" data-hint-out></span>{%- endif -%}
             </fieldset>
           {%- endfor -%}
         {%- endunless -%}
@@ -233,6 +235,8 @@
       $$('[data-chegada]').forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.chegada === state.chegada ? 'true' : 'false'); });
       $$('[data-neg]').forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.neg === state.neg ? 'true' : 'false'); });
       $$('[data-pp]').forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.pp === state.pp ? 'true' : 'false'); });
+      var hintOn = form.querySelector('[data-hint][aria-pressed="true"]'), hintOut = $('[data-hint-out]');
+      if (hintOut) hintOut.textContent = hintOn ? hintOn.dataset.hint : '';
 
       var gratis = state.rolos >= data.limiar;
       var prog = $('[data-progress]');
