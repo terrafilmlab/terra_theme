@@ -246,3 +246,6 @@ a.t-prices__row:hover { color: var(--terra-azul); }
   #header-component[data-menu-style='drawer'] .header__row--top .header__columns { grid-template-columns: 44px minmax(0, 1fr) auto minmax(0, 1fr) auto; }
   #header-component[data-menu-style='drawer'] .t-toplinks { grid-area: rightA; justify-self: end; }
 }
+#header-component .menu-drawer .menu-drawer__menu--childlist a,
+#header-component .menu-drawer .menu-drawer__menu--childlist .menu-drawer__menu-item { font-size: 17px; font-weight: 500; }
+#header-component .menu-drawer .menu-drawer__navigation { padding-inline: 32px; padding-top: 24px; }
