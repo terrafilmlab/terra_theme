@@ -16,7 +16,7 @@
       <div class="t-prices__row t-prices__head" role="row"><span role="columnheader">{{ s.col1 }}</span><span role="columnheader">{{ s.col2 }}</span><span role="columnheader">{{ s.col3 }}</span></div>
       {%- for block in section.blocks -%}
         {%- assign b = block.settings -%}
-        <a class="t-prices__row" role="row" href="{{ b.produto.url | default: '#' }}" {{ block.shopify_attributes }}>
+        <a class="t-prices__row" role="row" href="{% if b.produto != blank %}{{ b.produto.url }}?processo={{ b.processo | replace: '&amp;', '&' | handleize }}{% else %}#{% endif %}" {{ block.shopify_attributes }}>
           <span role="cell"><span class="t-display" style="font-size: 26px;">{{ b.processo }}</span> <span style="margin-left: 10px;">{{ b.descricao }}</span></span>
           <span role="cell" class="t-prices__val">{{ b.preco_rev }}</span>
           <span role="cell" class="t-prices__val">{{ b.preco_scan }}</span>

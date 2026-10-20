@@ -19,6 +19,7 @@
   assign envio = s.envio_produto.selected_or_first_available_variant
   assign devolucao = s.devolucao_produto.selected_or_first_available_variant
   assign sid = section.id
+  assign pp = s.pushpull_produto
 -%}
 
 <section class="t-section t-bg-areia" style="padding-top: 24px;">
@@ -61,6 +62,24 @@
             </fieldset>
           {%- endfor -%}
         {%- endunless -%}
+
+        {%- if pp != blank -%}
+          <fieldset class="t-field">
+            <legend>{{ 'terra.order.pushpull' | t }}</legend>
+            <div class="t-pills">
+              {%- assign normal_feito = false -%}
+              {%- for pv in pp.variants -%}
+                {%- unless normal_feito or pv.title contains 'Pull' -%}
+                  <button type="button" class="t-pill" data-pp="" aria-pressed="true">{{ 'terra.order.pp_normal' | t }}</button>
+                  {%- assign normal_feito = true -%}
+                {%- endunless -%}
+                <button type="button" class="t-pill" data-pp="{{ pv.id }}" data-pp-preco="{{ pv.price }}" aria-pressed="false">{{ pv.title }}</button>
+              {%- endfor -%}
+              {%- unless normal_feito -%}<button type="button" class="t-pill" data-pp="" aria-pressed="true">{{ 'terra.order.pp_normal' | t }}</button>{%- endunless -%}
+            </div>
+            <span class="t-small">{{ 'terra.order.pp_note' | t }}</span>
+          </fieldset>
+        {%- endif -%}
 
         {%- assign tem_extras = false -%}
         {%- for block in section.blocks -%}{%- if block.type == 'extra' and block.settings.produto != blank -%}{%- assign tem_extras = true -%}{%- endif -%}{%- endfor -%}
@@ -194,7 +213,10 @@
 
     var opts = [];
     $$('[data-opt][aria-pressed="true"]').forEach(function (b) { opts[+b.dataset.opt] = b.dataset.val; });
-    var state = { rolos: 1, chegada: data.envio ? 'dpd' : 'lab', neg: 'guardar' };
+    var state = { rolos: 1, chegada: data.envio ? 'dpd' : 'lab', neg: 'guardar', pp: '', ppPreco: 0 };
+    var slug = function (s) { return String(s).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, ''); };
+    var qp = new URLSearchParams(window.location.search).get('processo');
+    if (qp) { $$('[data-opt="0"]').forEach(function (b) { if (slug(b.dataset.val) === slug(qp)) opts[0] = b.dataset.val; }); }
 
     function findVariant(o) {
       if (!data.variants.length) return null;
@@ -214,6 +236,7 @@
       $('[data-rolos-out]').textContent = state.rolos;
       $$('[data-chegada]').forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.chegada === state.chegada ? 'true' : 'false'); });
       $$('[data-neg]').forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.neg === state.neg ? 'true' : 'false'); });
+      $$('[data-pp]').forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.pp === state.pp ? 'true' : 'false'); });
 
       var gratis = state.rolos >= data.limiar;
       var prog = $('[data-progress]');
@@ -230,8 +253,8 @@
 
       var total = 0;
       if (v) {
-        total += v.price * state.rolos;
-        $('[data-preco-unit]').textContent = money(v.price) + ' ' + data.t.perRoll;
+        total += (v.price + state.ppPreco) * state.rolos;
+        $('[data-preco-unit]').textContent = money(v.price + state.ppPreco) + ' ' + data.t.perRoll;
       }
       $$('[data-extra]').forEach(function (c) { if (c.checked) total += (+c.dataset.preco) * state.rolos; });
       if (state.chegada === 'dpd' && data.envio && !gratis) total += data.envio.price;
@@ -246,7 +269,8 @@
     form.addEventListener('click', function (e) {
       var b = e.target.closest('button');
       if (!b || !form.contains(b)) return;
-      if (b.dataset.opt !== undefined) { opts[+b.dataset.opt] = b.dataset.val; }
+      if (b.dataset.pp !== undefined) { state.pp = b.dataset.pp; state.ppPreco = +(b.dataset.ppPreco || 0); }
+      else if (b.dataset.opt !== undefined) { opts[+b.dataset.opt] = b.dataset.val; }
       else if (b.dataset.rolos) { state.rolos = Math.max(1, Math.min(30, state.rolos + (+b.dataset.rolos))); }
       else if (b.dataset.chegada) { state.chegada = b.dataset.chegada; }
       else if (b.dataset.neg) { state.neg = b.dataset.neg; }
@@ -274,6 +298,7 @@
           $$('[data-extra]').forEach(function (c) {
             if (c.checked) items.push({ id: +c.dataset.extra, quantity: state.rolos, properties: (function () { var p = {}; p[data.t.pFor] = v.name || ''; return p; })() });
           });
+          if (state.pp) items.push({ id: +state.pp, quantity: state.rolos, properties: (function () { var p = {}; p[data.t.pFor] = v.name || ''; return p; })() });
           if (state.chegada === 'dpd' && data.envio && !noCarrinho(data.envio.id)) items.push({ id: data.envio.id, quantity: 1 });
           if (state.neg === 'dpd' && data.devolucao && !noCarrinho(data.devolucao.id)) items.push({ id: data.devolucao.id, quantity: 1 });
           return fetch(data.addUrl, {
@@ -304,6 +329,7 @@
   "settings": [
     { "type": "header", "content": "Envio e devolução" },
     { "type": "product", "id": "envio_produto", "label": "Produto: Envio para o lab · DPD" },
+    { "type": "product", "id": "pushpull_produto", "label": "Produto: Push / Pull (um por rolo)" },
     { "type": "number", "id": "limiar", "label": "Envio grátis a partir de (rolos)", "default": 3 },
     { "type": "product", "id": "devolucao_produto", "label": "Produto: Devolução de negativos · DPD" },
     { "type": "number", "id": "meses_arquivo", "label": "Meses de arquivo grátis", "default": 3 },

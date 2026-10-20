@@ -15,6 +15,9 @@
       "email": "Email"
     },
     "order": {
+      "pushpull": "Push / Pull",
+      "pp_normal": "Normal",
+      "pp_note": "Push and pull cost €2 per roll, or €1 per roll from 3 pushed or pulled rolls of the same process.",
       "per_roll": "per roll",
       "extras": "Extras",
       "roll": "roll",

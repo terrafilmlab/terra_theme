@@ -35,7 +35,8 @@
         "meses_arquivo": 3,
         "morada_balcao": "Rua Duque de Saldanha 345, Bonfim",
         "envio_produto": "envio-para-o-lab-dpd",
-        "devolucao_produto": "devolucao-negativos-dpd"
+        "devolucao_produto": "devolucao-negativos-dpd",
+        "pushpull_produto": "push-pull"
       }
     }
   },

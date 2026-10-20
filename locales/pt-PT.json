@@ -6,6 +6,9 @@
       "email": "Email"
     },
     "order": {
+      "pushpull": "Push / Pull",
+      "pp_normal": "Normal",
+      "pp_note": "Push e pull custam 2 € por rolo, ou 1 € por rolo a partir de 3 rolos com push ou pull do mesmo processo.",
       "per_roll": "por rolo",
       "extras": "Extras",
       "roll": "rolo",

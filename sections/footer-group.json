@@ -239,7 +239,7 @@
           "type": "coluna",
           "settings": {
             "titulo": "Lab",
-            "links": "<p><a href=\"/collections/revelacao-scan\">Revelação &amp; Scan</a></p><p><a href=\"/#scan-10k\">Scan 10K</a></p><p><a href=\"/products/devolucao-negativos-dpd\">Pedir os meus negativos</a></p><p><a href=\"/#precos\">Prazos</a></p>"
+            "links": "<p><a href=\"/products/revelacao\">Revelação &amp; Scan</a></p><p><a href=\"/#scan-10k\">Scan 10K</a></p><p><a href=\"/products/devolucao-negativos-dpd\">Pedir os meus negativos</a></p><p><a href=\"/#precos\">Prazos</a></p>"
           }
         },
         "col2": {

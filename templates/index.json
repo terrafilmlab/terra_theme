@@ -12,7 +12,7 @@
     "hero": {
       "type": "terra-hero",
       "settings": {
-        "link1": "shopify://collections/revelacao-scan",
+        "link1": "shopify://products/revelacao",
         "link2": "#precos",
         "titulo": "Revelamos filme no <em>Bonfim</em>.",
         "texto": "<p>C-41, preto e branco, E-6 e ECN-2. Deixas os rolos <strong>no balcão, na Rua Duque de Saldanha</strong>, ou mandas <strong>pela DPD de qualquer ponto do país</strong>. Os scans chegam-te por email.</p>",
@@ -86,7 +86,7 @@
             "descricao": "cor",
             "preco_rev": "6 €",
             "preco_scan": "12 €",
-            "produto": "revelacao-c41"
+            "produto": "revelacao"
           }
         },
         "p2": {
@@ -96,7 +96,7 @@
             "descricao": "preto e branco",
             "preco_rev": "8 €",
             "preco_scan": "14 €",
-            "produto": "revelacao-pb"
+            "produto": "revelacao"
           }
         },
         "p3": {
@@ -106,7 +106,7 @@
             "descricao": "positivo",
             "preco_rev": "12 €",
             "preco_scan": "18 €",
-            "produto": "revelacao-e6"
+            "produto": "revelacao"
           }
         },
         "p4": {
@@ -116,7 +116,7 @@
             "descricao": "película de cinema",
             "preco_rev": "14 €",
             "preco_scan": "20 €",
-            "produto": "revelacao-ecn2"
+            "produto": "revelacao"
           }
         }
       },
