@@ -224,7 +224,7 @@ a.t-prices__row:hover { color: var(--terra-azul); }
 /* Menu em gaveta (três traços) com a ilustração 37 em cru no fundo */
 #header-component .menu-drawer,
 #header-component .menu-drawer__submenu {
-  background-color: var(--terra-terracota);
+  background-color: var(--terra-castanho);
   background-image: var(--terra-ilu-37-fundo);
   background-repeat: no-repeat;
   background-position: right -60px bottom -40px;
