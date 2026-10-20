@@ -32,7 +32,7 @@
       "neg_keep": "Keep them at the lab",
       "neg_keep_sub": "We hold on to them for {{ n }} months. Ask for them whenever you like.",
       "neg_pickup": "Pick them up at the lab",
-      "neg_pickup_sub": "We’ll email you when they’re ready.",
+      "neg_pickup_sub": "We’ll email you when they’re ready. We keep them at the lab for {{ n }} months from the day your scans are sent. After that they’re recycled, without further notice.",
       "neg_dpd": "Send them back by DPD",
       "neg_dpd_sub": "They go out by DPD once the scans are done.",
       "total": "Estimated total",

@@ -23,7 +23,7 @@
       "neg_keep": "Guardar no lab",
       "neg_keep_sub": "Ficam connosco {{ n }} meses. Pedes quando quiseres.",
       "neg_pickup": "Levantar no lab",
-      "neg_pickup_sub": "Avisamos por email quando estiverem prontos.",
+      "neg_pickup_sub": "Avisamos por email quando estiverem prontos. Ficam guardados no lab {{ n }} meses a contar do envio dos scans. Depois desse prazo são reciclados, sem aviso prévio.",
       "neg_dpd": "Devolver pela DPD",
       "neg_dpd_sub": "Seguem pela DPD depois do scan.",
       "total": "Total estimado",

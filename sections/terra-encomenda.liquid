@@ -128,13 +128,9 @@
 
         <fieldset class="t-field">
           <legend>{{ 'terra.order.negatives' | t }}</legend>
-          <button type="button" class="t-choice" data-neg="guardar" aria-pressed="true">
-            <span class="t-choice__top"><span>{{ 'terra.order.neg_keep' | t }}</span><span>{{ 'terra.common.free' | t }}</span></span>
-            <span class="t-choice__sub">{{ 'terra.order.neg_keep_sub' | t: n: s.meses_arquivo }}</span>
-          </button>
-          <button type="button" class="t-choice" data-neg="levantar" aria-pressed="false">
+          <button type="button" class="t-choice" data-neg="levantar" aria-pressed="true">
             <span class="t-choice__top"><span>{{ 'terra.order.neg_pickup' | t }}</span><span>{{ 'terra.common.free' | t }}</span></span>
-            <span class="t-choice__sub">{{ 'terra.order.neg_pickup_sub' | t }}</span>
+            <span class="t-choice__sub">{{ 'terra.order.neg_pickup_sub' | t: n: s.meses_arquivo }}</span>
           </button>
           {%- if devolucao -%}
             <button type="button" class="t-choice" data-neg="dpd" aria-pressed="false">
@@ -213,7 +209,7 @@
 
     var opts = [];
     $$('[data-opt][aria-pressed="true"]').forEach(function (b) { opts[+b.dataset.opt] = b.dataset.val; });
-    var state = { rolos: 1, chegada: data.envio ? 'dpd' : 'lab', neg: 'guardar', pp: '', ppPreco: 0 };
+    var state = { rolos: 1, chegada: data.envio ? 'dpd' : 'lab', neg: 'levantar', pp: '', ppPreco: 0 };
     var slug = function (s) { return String(s).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, ''); };
     var qp = new URLSearchParams(window.location.search).get('processo');
     if (qp) { $$('[data-opt="0"]').forEach(function (b) { if (slug(b.dataset.val) === slug(qp)) opts[0] = b.dataset.val; }); }
