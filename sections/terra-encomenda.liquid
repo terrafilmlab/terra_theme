@@ -56,7 +56,7 @@
               <legend>{{ option.name }}</legend>
               <div class="t-pills">
                 {%- for value in option.values -%}
-                  {%- capture hint -%}{%- if oi == 2 -%}{{ 'terra.scan.h' | append: forloop.index0 | t }}{%- endif -%}{%- endcapture -%}
+                  {%- capture hint -%}{%- if oi == 2 -%}{%- case forloop.index0 -%}{%- when 0 -%}{{ 'terra.scan.h0' | t }}{%- when 1 -%}{{ 'terra.scan.h1' | t }}{%- when 2 -%}{{ 'terra.scan.h2' | t }}{%- when 3 -%}{{ 'terra.scan.h3' | t }}{%- when 4 -%}{{ 'terra.scan.h4' | t }}{%- when 5 -%}{{ 'terra.scan.h5' | t }}{%- endcase -%}{%- endif -%}{%- endcapture -%}
                   <button type="button" class="t-pill" data-opt="{{ oi }}" data-val="{{ value | escape }}"{% if oi == 2 %} data-hint="{{ hint | escape }}"{% endif %} aria-pressed="{% if v0.options[oi] == value %}true{% else %}false{% endif %}">{{ value }}</button>
                 {%- endfor -%}
               </div>
